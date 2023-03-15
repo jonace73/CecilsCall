@@ -202,7 +202,7 @@ namespace CecilsCall.Droid.Services
         [System.Obsolete]
         private void RingBell(Android.Content.Context context)
         {
-            Debugger.Msg("<<<<< AlarmReceiver.RingBell xx >>>>>");
+            Debugger.Msg("<<<<< AlarmReceiver.RingBell >>>>>");
             try
             {
                 // Respond to AudioManager keys on lock screen
