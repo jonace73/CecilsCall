@@ -202,19 +202,36 @@ namespace CecilsCall.Droid.Services
         [System.Obsolete]
         private void RingBell(Android.Content.Context context)
         {
+            Debugger.Msg("<<<<< AlarmReceiver.RingBell >>>>>");
             try
             {
-                Debugger.Msg("<<<<< AlarmReceiver.RingBell >>>>>");
-
                 // Respond to AudioManager keys on lock screen
                 RemoteLockScreenControlReceiver.respondToKey = true;
-
+            }
+            catch (Exception err)
+            {
+                Debugger.Msg("RingBell ERROR respondToKey: " + err.Message);
+            }
+            try
+            {
                 // Fire intent to start ringing BEFORE BringAppToForeground that is NECESSARY in MainActivity.OnPause
                 DependencyService.Get<ILockScreenAudio>().FireIntent("com.xamarin.action.PLAY");
-
+            }
+            catch (Exception err)
+            {
+                Debugger.Msg("RingBell ERROR FireIntent: " + err.Message);
+            }
+            try
+            {
                 // Start monitoring shake
                 AndroidAlarmClock.gDetectShake.StartMonitoring();
-
+            }
+            catch (Exception err)
+            {
+                Debugger.Msg("RingBell ERROR StartMonitoring: " + err.Message);
+            }
+            try
+            {
                 // If onPause, go to foreground
                 if (MainActivity.isOnPause)
                 {
@@ -223,7 +240,7 @@ namespace CecilsCall.Droid.Services
             }
             catch (Exception err)
             {
-                Debugger.Msg("AlarmReceiver.RingBell ERROR: " + err.Message);
+                Debugger.Msg("RingBell ERROR BringAppToForeground: " + err.Message);
             }
         }
         void BringAppToForeground()
