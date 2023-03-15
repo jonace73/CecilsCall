@@ -10,7 +10,7 @@ using Xamarin.Forms;
 namespace CecilsCall.Droid
 {
     [System.Obsolete]
-    [Activity(Label = "CecilsCall", Icon = "@mipmap/icon", Theme = "@drawable/LogoCecilsCall", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(Label = "CecilsCall", Icon = "@drawable/LogoCecilsCall", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static bool isOnPause = false;
