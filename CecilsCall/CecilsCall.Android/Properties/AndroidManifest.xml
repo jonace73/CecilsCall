@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.WhizKod.CecilsCall" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
+	<application android:label="CecilsCall.Android" android:theme="@style/MainTheme">
+		<receiver android:name="CecilsCall.Android.AlarmReceiver" android:enabled="true" android:exported="true" />
+		<receiver android:exported="false" android:name="CecilsCall.Android.Services.RemoteLockScreenControlReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.MEDIA_BUTTON" />
+			</intent-filter>
+		</receiver>
+		<service android:exported="false" android:enabled="true" android:name="CecilsCall.Android.Services.LockScreenAudio">
+			<intent-filter>
+				<action android:name="com.xamarin.action.PLAY" />
+				<action android:name="com.xamarin.action.PAUSE" />
+				<action android:name="com.xamarin.action.STOP" />
+				<action android:name="com.xamarin.action.TOGGLEPLAYBACK" />
+				<action android:name="com.xamarin.action.NEXT" />
+				<action android:name="com.xamarin.action.PREVIOUS" />
+				<action android:name="android.intent.action.MEDIA_BUTTON" />
+			</intent-filter>
+		</service>
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.GET_TASKS" />
+	<uses-permission android:name="android.permission.REORDER_TASKS" />
+	<uses-permission android:name="android.permission.INTERNET" />
+</manifest>

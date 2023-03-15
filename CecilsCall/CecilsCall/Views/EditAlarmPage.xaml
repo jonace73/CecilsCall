@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CecilsCall.Views.EditAlarmPage"
+    BackgroundImageSource="@drawable/SkyNarrow" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Text="Alarms             " FontSize="Large" VerticalOptions="Center"/>
+            <Button Text="Add" FontSize="Large" VerticalOptions="Center" HorizontalOptions="End" Clicked="OnAddClicked"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Spacing="0" >
+
+            <!-- Current time -->
+            <Label Text="Current time:" Margin="20, 40, 20, 0" FontSize="Large" />
+            <Label x:Name="timeCurrent" Margin="40,0,20,40" FontAttributes="Bold" FontSize="Large" />
+
+            <!-- Automatic Setting button -->
+            <Button x:Name="autoTimeSet" Margin="20" Text="Auto Alarm Time Setting" Clicked="OnSettingButtonClicked" IsVisible="false" />
+
+            <!-- Display Alarms in the database in a list -->
+            <CollectionView x:Name="collectionView" Margin="20,2,5,2" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <!-- Define the appearance of each item in the list Below: Text and Date are
+                         the public members of Models.AlarmP.cs used in AlarmPage.xaml.cs -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding ID}" FontSize="Large"/>
+                                <Label Text=":  " FontSize="Large"/>
+                                <Label Text="{Binding Text}" FontSize="Large"/>
+                            </StackLayout>
+                            <Label Text="{Binding Date}" TextColor="Silver" FontSize="Small" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

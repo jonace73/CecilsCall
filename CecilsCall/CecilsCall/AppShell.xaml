@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:CecilsCall.Views"
+    x:Class="CecilsCall.AppShell" >
+
+    <Shell.Resources>
+        <!-- Style Shell elements -->
+        <Style x:Key="BaseStyle" TargetType="Element">
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource AppPrimaryColor}" />
+            <Setter Property="Shell.ForegroundColor" Value="{StaticResource SecondaryColor}" />
+            <Setter Property="Shell.TitleColor" Value="{StaticResource SecondaryColor}" />
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+        </Style>
+        <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+    </Shell.Resources>
+
+    <!-- Display a bottom tab bar containing three tabs 
+    The codes below will AUTOMATICALLY place the components at the bottom -->
+    <TabBar>
+        <ShellContent Title="Alarm"
+            Icon="AlarmIconX.png"
+            ContentTemplate="{DataTemplate views:AlarmPage}" />
+        <ShellContent Title="Edit"
+            Icon="EditIconX.png"
+            ContentTemplate="{DataTemplate views:EditAlarmPage}" />
+        <ShellContent Title="Contacts"
+            Icon="ContactsIconX.png"
+            ContentTemplate="{DataTemplate views:ContactsPage}" />
+        <ShellContent Title="Settings"
+            Icon="SettingsIconX.png"
+            ContentTemplate="{DataTemplate views:Settings}" />
+        <ShellContent Title="Debug"
+            x:Name="DebugInAppShell"          
+            Icon="DebugIconX.png"
+            ContentTemplate="{DataTemplate views:DebugPage}"
+            IsVisible="false"/>
+    </TabBar>
+</Shell>

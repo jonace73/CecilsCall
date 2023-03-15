@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CecilsCall.Views.Settings"
+             BackgroundImageSource="@drawable/SkyNarrow" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Text="Settings           " FontSize="Large" VerticalOptions="Center"/>
+            <Button Text="Save" FontSize="Large" VerticalOptions="Center" HorizontalOptions="End" Clicked="OnSaveSettingsButtonClicked"/>
+        </StackLayout>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <Label Text="Owner's name:" Margin="20,40,10,0" FontSize="Medium"/>
+            <Editor x:Name="OwnersName" Placeholder ="Your name please" Margin="20,0,10,0" />
+            <Label Text="Maximum alarm repeatition:"  Margin="20,5,10,0" FontSize="Medium"/>
+            <Editor x:Name="MaxNumberRepeatitions" Placeholder ="2" Margin="20,0,10,0" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CecilsCall.Views.ContactEntryPage"
+             BackgroundImageSource="@drawable/SkyNarrow" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Text="Contact Entry" FontSize="Large" VerticalOptions="Center"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <BoxView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
+        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
+
+            <!-- Layout Contact details -->
+            <Editor x:Name="NameEdit" Placeholder="Enter your friend's name" Text="{Binding name}" HeightRequest="50" />
+            <Editor  x:Name="NumberEdit" Placeholder="Enter your friend's mobile number" Text="{Binding number}" HeightRequest="50" />
+
+            <!-- Layout Buttons in two columns -->
+            <Grid ColumnDefinitions="*,*">
+                <Button Text="Save"
+                Clicked="OnSaveContactButtonClicked" />
+                <Button Grid.Column="1"
+                Text="Delete"
+                Clicked="OnDeleteContactButtonClicked"/>
+            </Grid>
+
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

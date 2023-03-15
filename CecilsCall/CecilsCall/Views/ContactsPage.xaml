@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CecilsCall.Views.ContactsPage"
+             BackgroundImageSource="@drawable/SkyNarrow" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Text="Contacts           " FontSize="Large" VerticalOptions="Center"/>
+            <Button Text="Add" FontSize="Large" VerticalOptions="Center" HorizontalOptions="End" Clicked="OnAddContactClicked"/>
+        </StackLayout>
+    </Shell.TitleView>
+    
+    <StackLayout Margin="20,40,20,20">
+
+        <!-- Display contacts -->
+        <CollectionView x:Name="contactsView" Margin="10" SelectionMode="Single" SelectionChanged="OnContactSelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <!-- Define the appearance of each item in the list. Below: Name and Number are the public
+                    members of Models.Contact.cs used in ContactsPage.xaml.cs -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding name}" FontSize="Medium"/>
+                        <Label Text="{Binding number}" FontSize="Medium"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>

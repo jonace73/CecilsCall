@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CecilsCall.Views.AlarmPage"
+    NavigationPage.HasNavigationBar="false"
+    BackgroundImageSource="@drawable/SkyNarrow" >
+
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Margin="0">
+            <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start"/>
+            <Label Text="Cecil's Call" FontSize="Large" VerticalOptions="Center"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
+
+                <!-- Button to stop alarm AND Display remaining alarm time -->
+                <Button x:Name="AlarmOffButton" IsVisible="false" Text="Put alarm off" FontSize="Large" Clicked="OnKillPageButtonClicked" />
+                <Label x:Name="remainingTimeLabel" IsVisible="false" Text="Remaining alarm time:" FontSize="Large" />
+                <Label x:Name="remainingTime" IsVisible="false"  FontAttributes="Bold" Text="" FontSize="48" />
+
+                <!-- Display alarm label AND next alarm -->
+                <Label x:Name="AlarmLabel" Text="Next alarm at:" FontSize="Large"/>
+                <Label x:Name="NextAlarm" FontAttributes="Bold" Text="" FontSize="48" />
+
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+
+</ContentPage>
