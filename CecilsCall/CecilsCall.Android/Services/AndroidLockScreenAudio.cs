@@ -68,6 +68,7 @@ namespace CecilsCall.Droid.Services
                     mediaButtonIntent.SetComponent(remoteComponentName);
 
                     // Create new pending intent for the intent
+                    // PendingIntentFlags MUST be = 0. Otherwise, lock screen alarm buttons will not work
                     var mediaPendingIntent = PendingIntent.GetBroadcast(Android.App.Application.Context, 0, mediaButtonIntent, 0);
 
                     // Create and register the remote control client

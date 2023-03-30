@@ -10,9 +10,6 @@ using Android.OS;
 using static Android.App.ActivityManager;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Android.Hardware.Display;
-using Android.Views;
-using Xamarin.Essentials;
 
 [assembly: Dependency(typeof(AndroidAlarmClock))]
 namespace CecilsCall.Droid.Services
@@ -34,23 +31,25 @@ namespace CecilsCall.Droid.Services
         }
         public void SetAlarm(AlarmP alarm)
         {
+            Debugger.Msg("AlarmClock.SetAlarm: " + alarm.ID + " alarm time: " + alarm.Text);
+
             try
             {
-                Debugger.Msg("AlarmClock.SetAlarm: " + alarm.ID + " alarm time: " + alarm.Text);
-
-                var alarmIntent = new Intent(Android.App.Application.Context, typeof(AlarmReceiver));
+                Intent alarmIntent = new Intent(Android.App.Application.Context, typeof(AlarmReceiver));
                 alarmIntent.SetFlags(ActivityFlags.IncludeStoppedPackages);
                 alarmIntent.PutExtra("id", alarm.getIDasString());
                 alarmIntent.PutExtra("requestCode", alarm.GetRequestCode().ToString());
 
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(Android.App.Application.Context, alarm.GetRequestCode(), alarmIntent, PendingIntentFlags.UpdateCurrent);
+                PendingIntent pendingIntent = PendingIntent.GetBroadcast(Android.App.Application.Context, alarm.GetRequestCode(), alarmIntent, PendingIntentFlags.Immutable);//UpdateCurrent
 
                 AlarmManager alarmManager = (AlarmManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.AlarmService);
                 alarmManager.SetExact(AlarmType.RtcWakeup, Java.Lang.JavaSystem.CurrentTimeMillis() + alarm.TimeToGoOffFromMidnight(), pendingIntent);
-
             }
             catch (Exception err)
             {
+                /*/
+                string msg = err.Message;
+                string shortMsg = msg.Remove(0, 65);//*/
                 Debugger.Msg("LSA.SetAlarm ERROR: " + err.Message);
             }
         }
@@ -62,7 +61,7 @@ namespace CecilsCall.Droid.Services
 
             int requestCodeINT = int.Parse(requestCode);
             var alarmManager = (AlarmManager)Android.App.Application.Context.GetSystemService(Context.AlarmService);
-            var toDeletePendingIntent = PendingIntent.GetBroadcast(Android.App.Application.Context, requestCodeINT, alarmIntent, PendingIntentFlags.CancelCurrent);
+            var toDeletePendingIntent = PendingIntent.GetBroadcast(Android.App.Application.Context, requestCodeINT, alarmIntent, PendingIntentFlags.Immutable);//CancelCurrent
             alarmManager.Cancel(toDeletePendingIntent);
         }
         public AlarmP NearestFutureAlarm(List<AlarmP> database)
@@ -133,8 +132,11 @@ namespace CecilsCall.Droid.Services
             // Save new as old alarm
             oldAlarm = newAlarm;
 
-            // Do nothing if null
-            if (newAlarm == null) return;
+            // If no alarm set 
+            if (newAlarm == null)
+            {
+                return;
+            }
 
             // Set new alarm
             SetAlarm(newAlarm);
@@ -154,7 +156,7 @@ namespace CecilsCall.Droid.Services
     {
         public static bool isScreenOff = false;
         public override void OnReceive(Android.Content.Context context, Intent intent)
-        {            
+        {
             Debugger.Msg("AlarmReceiver.Received on: " + DateTime.Now.ToString("HH:mm:ss"));
 
             // Signal system that alarm is on. DON'T TRANSFER THIS CODE
@@ -220,6 +222,7 @@ namespace CecilsCall.Droid.Services
             catch (Exception err)
             {
                 Debugger.Msg("RingBell ERROR FireIntent: " + err.Message);
+                // You must call Xamarin.Forms.Forms.Init(); prior to using this property
             }
             try
             {

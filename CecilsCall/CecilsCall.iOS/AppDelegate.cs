@@ -24,10 +24,6 @@ namespace CecilsCall.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-#if ENABLE_TEST_CLOUD
-                // requires Xamarin Test Cloud Agent
-       Xamarin.Calabash.Start(); 
-#endif
             return base.FinishedLaunching(app, options);
         }
     }

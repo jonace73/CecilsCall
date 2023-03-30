@@ -4,6 +4,7 @@
              x:Class="CecilsCall.Views.ContactsPage"
              BackgroundImageSource="@drawable/SkyNarrow" >
 
+    <!-- Header -->
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Margin="0">
             <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>

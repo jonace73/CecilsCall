@@ -6,6 +6,13 @@ using CecilsCall.Droid.Services;
 using CecilsCall.Services;
 using CecilsCall.Views;
 using Xamarin.Forms;
+using AndroidX.Core.Content;
+using Android;
+using AndroidX.Core.App;
+using System;
+using Java.Interop;
+
+using Android.Telephony;
 
 namespace CecilsCall.Droid
 {
@@ -21,6 +28,8 @@ namespace CecilsCall.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            RequestSMSpermission();
         }
         protected override void OnPause()
         {
@@ -49,9 +58,45 @@ namespace CecilsCall.Droid
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);//
+            if (requestCode == 1)
+            {
+                Debugger.Msg("Inside OnRequestPermissionsResult");
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+                // Check if the only required permission has been granted
+                if ((grantResults.Length == 1) && (grantResults[0] == Permission.Granted))
+                {
+                    // Location permission has been granted, okay to retrieve the location of the device.
+                    Debugger.Msg("SMS permission is granted");
+                }
+                else
+                {
+                    Debugger.Msg("SMS permission is not granted");
+                }
+            }
+            else
+            {
+                base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            }//*/
+        }
+        protected void RequestSMSpermission()
+        {
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.SendSms) == (int)Permission.Granted)
+            {
+                // We have permission.
+                Debugger.Msg("Permission already granted");
+                return;
+            }
+
+            Debugger.Msg("Permission is needed");
+            ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.SendSms }, 1);
+        }
+
+        [Export("SendSMSBackdoor")]
+        public void SendSMSBackdoor()
+        {
+            SmsManager.Default.SendTextMessage("0449271275", null, "Test sending SMS.", null, null);
         }
     } // CLASS ENDS
 }

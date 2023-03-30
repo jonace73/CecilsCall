@@ -16,5 +16,5 @@
         <ToolbarItem Text="Send" Clicked="OnSendMsgsClicked" />
     </ContentPage.ToolbarItems>
 
-    <Editor x:Name="DebuggingOutputs" Text="" IsReadOnly="true" />
+    <Editor  x:Name="DebuggingOutputs" Text="" IsReadOnly="true" />
 </ContentPage>

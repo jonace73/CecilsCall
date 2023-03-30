@@ -16,12 +16,12 @@
         <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
 
             <!-- Layout Contact details -->
-            <Editor x:Name="NameEdit" Placeholder="Enter your friend's name" Text="{Binding name}" HeightRequest="50" />
-            <Editor  x:Name="NumberEdit" Placeholder="Enter your friend's mobile number" Text="{Binding number}" HeightRequest="50" />
+            <Editor AutomationId ="ContactName" x:Name="NameEdit" Placeholder="Enter your friend's name" Text="{Binding name}" HeightRequest="50" />
+            <Editor AutomationId ="ContactNumber"  x:Name="NumberEdit" Placeholder="Enter your friend's mobile number" Text="{Binding number}" HeightRequest="50" />
 
             <!-- Layout Buttons in two columns -->
             <Grid ColumnDefinitions="*,*">
-                <Button Text="Save"
+                <Button AutomationId="ContactSave"  Text="Save"
                 Clicked="OnSaveContactButtonClicked" />
                 <Button Grid.Column="1"
                 Text="Delete"

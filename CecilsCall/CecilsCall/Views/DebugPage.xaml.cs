@@ -59,7 +59,7 @@ namespace CecilsCall.Views
         {
             try
             {
-                DependencyService.Get<ISMS>().SendSMS("0449271275", DebugText);
+                DependencyService.Get<ISMS>().SendSMS(Settings.sellersContact, DebugText);
             }
             catch (Exception err)
             {

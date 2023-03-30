@@ -27,9 +27,12 @@ namespace CecilsCall.Views
             // and set them as the data source for the CollectionView.
             collectionView.ItemsSource = await AlarmPage.DBAlarms.GetAlarmsAsync();
             LocalTimer();
-#if MY_DEBUG
-            autoTimeSet.IsVisible = true;
-#endif
+
+            if (App.isInDebug)
+            {
+                autoTimeSet.IsVisible = true;
+            }
+
         }
         async void OnSettingButtonClicked(object sender, EventArgs e)
         {

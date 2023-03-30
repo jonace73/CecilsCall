@@ -7,6 +7,7 @@ namespace CecilsCall
     public partial class App : Application
     {
         public static bool isInDebug = true;
+
         public App()
         {
             InitializeComponent();

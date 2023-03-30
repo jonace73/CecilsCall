@@ -44,12 +44,18 @@ namespace CecilsCall.Views
         }
         async public void DisplaySoonestAlarm()
         {
+            // Get the alarm soonest to ring. If there is none change text in AlarmLabel and NextAlarm
             AlarmP alarmP = await DependencyService.Get<IAlarmClock>().GetSoonestAlarm();
             if (alarmP != null)
             {
+                AlarmLabel.Text = "Next alarm at:";
                 NextAlarm.Text = alarmP.Text;
-            }            
-        }        
+            } else
+            {
+                AlarmLabel.Text = "Please click 'Edit' to enter an alarm.";
+                NextAlarm.Text = "";
+            }                                       
+        }
         async void OnKillPageButtonClicked(object sender, EventArgs e)
         {
             // Remove and reset

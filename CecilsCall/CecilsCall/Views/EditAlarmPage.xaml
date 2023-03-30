@@ -4,6 +4,7 @@
     x:Class="CecilsCall.Views.EditAlarmPage"
     BackgroundImageSource="@drawable/SkyNarrow" >
 
+    <!-- Header -->
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Margin="0">
             <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
@@ -16,7 +17,7 @@
         <StackLayout Orientation="Vertical" Spacing="0" >
 
             <!-- Current time -->
-            <Label Text="Current time:" Margin="20, 40, 20, 0" FontSize="Large" />
+            <Label x:Name="LabelTimeCurrent" Text="Current time:" Margin="20, 40, 20, 0" FontSize="Large" />
             <Label x:Name="timeCurrent" Margin="40,0,20,40" FontAttributes="Bold" FontSize="Large" />
 
             <!-- Automatic Setting button -->

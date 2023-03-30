@@ -14,10 +14,25 @@
     
     <ContentPage.Content>
         <StackLayout Spacing="0">
+
+            <!-- Owner's name -->
             <Label Text="Owner's name:" Margin="20,40,10,0" FontSize="Medium"/>
-            <Editor x:Name="OwnersName" Placeholder ="Your name please" Margin="20,0,10,0" />
+            <Editor AutomationId ="OwnerSettings" x:Name="OwnersName" Placeholder ="Your name please" Margin="20,0,10,0" />
+
+            <!-- Maximum alarm repeatition -->
             <Label Text="Maximum alarm repeatition:"  Margin="20,5,10,0" FontSize="Medium"/>
-            <Editor x:Name="MaxNumberRepeatitions" Placeholder ="2" Margin="20,0,10,0" />
+            <Editor AutomationId ="RepeatitionsSettings" x:Name="MaxNumberRepeatitions" Placeholder ="1" Margin="20,0,10,0" />
+
+            <!-- Seller's Contact -->
+            <Label Text="Seller's contact:"  Margin="20,5,10,0" FontSize="Medium"/>
+            <Editor AutomationId ="UITestSellersContact" x:Name="SellersContact" Placeholder ="0449271275" Margin="20,0,10,0" />
+            
+            <!-- Debug option -->
+            <Grid ColumnDefinitions="*,*">
+                <Button Text="Debug" Clicked="OnDebugButtonClicked" />
+                <Button Grid.Column="1" Text="No Debug" Clicked="OnNoDebugButtonClicked"/>
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

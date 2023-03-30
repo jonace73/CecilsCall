@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CecilsCall.Views.AlarmEntryPage"
     BackgroundImageSource="@drawable/SkyNarrow" >
-    
+
+    <!-- Header -->
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Margin="0">
             <Image Source="@drawable/LogoCecilsCall.png" HorizontalOptions="Start" VerticalOptions="Center"/>
@@ -16,11 +17,12 @@
         <BoxView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
         <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
 
-            <TimePicker x:Name="timePicked" Time="00:00:00" Format="T" PropertyChanged="OnTimePickerPropertyChanged" />
-
+            <TimePicker AutomationId ="MyTimePicker"  x:Name="timePicked" Time="0:0:0" Format="T" PropertyChanged="OnTimePickerPropertyChanged" IsVisible="true" />
+            <Editor AutomationId ="EnterAlarmEditor" x:Name="timeEditor" Placeholder="HH:MM:SS" Text="{Binding Text}" HeightRequest="50" IsVisible="true" />
+            
             <!-- Layout Buttons in two columns -->
             <Grid ColumnDefinitions="*,*">
-                <Button Text="Save" Clicked="OnSaveButtonClicked" />
+                <Button AutomationId="ButtonSave"  Text="Save" Clicked="OnSaveButtonClicked" />
                 <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"/>
             </Grid>
 

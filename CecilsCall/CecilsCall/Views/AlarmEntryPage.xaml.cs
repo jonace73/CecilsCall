@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define IS_UNDER_UITEST
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -13,7 +15,10 @@ namespace CecilsCall.Views
     /* This class is used when a particular database entry is processed */
     public partial class AlarmEntryPage : ContentPage
     {
+
+#if !IS_UNDER_UITEST
         AlarmP alarm;
+#endif
         public string ItemId
         {
             set
@@ -25,7 +30,18 @@ namespace CecilsCall.Views
         public AlarmEntryPage()
         {
             InitializeComponent();
+
+            // Make Editor visible when TESTING
+#if IS_UNDER_UITEST
+            timePicked.IsVisible = false;
+            timeEditor.IsVisible = true;
+            // Set the BindingContext of the page to a new Note.
+            BindingContext = new AlarmP();
+#else
+            timePicked.IsVisible = true;
+            timeEditor.IsVisible = false;
             alarm = new AlarmP();
+#endif
         }
         async void LoadAlarm(string itemId)
         {
@@ -34,10 +50,14 @@ namespace CecilsCall.Views
                 int id = Convert.ToInt32(itemId);
 
                 // Retrieve the Alarm.
+#if IS_UNDER_UITEST
+                AlarmP alarm = await AlarmPage.DBAlarms.GetAlarmAsync(id);
+                BindingContext = alarm;
+#else
                 alarm = await AlarmPage.DBAlarms.GetAlarmAsync(id);
-
                 // Display time in timePicker
                 timePicked.Time = TimeSpan.Parse(alarm.Text);
+#endif
             }
             catch (Exception)
             {
@@ -46,34 +66,51 @@ namespace CecilsCall.Views
         }
         void OnTimePickerPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
+#if !IS_UNDER_UITEST
             if (args.PropertyName == "Time")
             {
                 alarm.Text = timePicked.Time.ToString(@"hh\:mm\:ss");
             }
+#endif
         }
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-
-            if (!string.IsNullOrWhiteSpace(alarm.Text))
+            try
             {
-                // If alarm time is unique then save else no
-                bool shouldSave = await ShouldSaveAlarm(alarm);
-                if (shouldSave)
+#if IS_UNDER_UITEST
+                var alarm = (AlarmP)BindingContext;
+#endif
+                if (!string.IsNullOrWhiteSpace(alarm.Text))
                 {
-                    alarm.Date = DateTime.UtcNow;
-                    await AlarmPage.DBAlarms.SaveAlarmAsync(alarm);
+                    // If alarm time is unique then save else no
+                    bool shouldSave = await ShouldSaveAlarm(alarm);
+                    if (shouldSave)
+                    {
+                        alarm.Date = DateTime.UtcNow;
+                        // Checking alarm saving
+
+                        await AlarmPage.DBAlarms.SaveAlarmAsync(alarm);
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error:", TrimAlarmTime(alarm.Text) + " is already present.", "OK");
+                    }
+
+                    // Reset Alarm
+                    DependencyService.Get<IAlarmClock>().ResetAlarm();
                 }
                 else
                 {
-                    await DisplayAlert("Error:", TrimAlarmTime(alarm.Text) + " is already present.", "OK");
+                    await DisplayAlert("Bug:", "IsNullOrWhiteSpace", "OK");
                 }
 
-                // Reset Alarm
-                DependencyService.Get<IAlarmClock>().ResetAlarm();
+                // Navigate backwards
+                await Shell.Current.GoToAsync("..");
             }
-
-            // Navigate backwards
-            await Shell.Current.GoToAsync("..");
+            catch (Exception err)
+            {
+                await DisplayAlert("OnSaveButtonClicked:", "Error " + err.Message, "OK");
+            }
         }
         async Task<bool> ShouldSaveAlarm(AlarmP alarm)
         {
@@ -98,6 +135,9 @@ namespace CecilsCall.Views
         }
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
+#if IS_UNDER_UITEST
+            var alarm = (AlarmP)BindingContext;
+#endif
             // Delete alarm from database
             await AlarmPage.DBAlarms.DeleteAlarmAsync(alarm);
 
