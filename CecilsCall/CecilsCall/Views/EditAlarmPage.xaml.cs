@@ -28,13 +28,11 @@ namespace CecilsCall.Views
             collectionView.ItemsSource = await AlarmPage.DBAlarms.GetAlarmsAsync();
             LocalTimer();
 
-            if (App.isInDebug)
-            {
-                autoTimeSet.IsVisible = true;
-            }
+            // Change auto time setting
+            autoTimeSet.IsVisible = App.isInDebug;
 
         }
-        async void OnSettingButtonClicked(object sender, EventArgs e)
+        async void OnAutoSettingButtonClicked(object sender, EventArgs e)
         {
             // This is used for SETTING purpose ONLY
             // Use current time then add ten second multiple for each DB entry
@@ -43,8 +41,9 @@ namespace CecilsCall.Views
             DateTime dateTime = DateTime.Now;
             foreach (AlarmP pAlarm in DB)
             {
-                var adjustedTime = dateTime.AddSeconds(60 * (increment++) + 10);
-                pAlarm.Text = adjustedTime.ToString("HH:mm:ss");
+                var adjustedTime = dateTime.AddSeconds(60 * (increment++) + 20); // 20 FOR SERVER DEBUGGING
+                pAlarm.AlarmTime = adjustedTime.ToString("HH:mm:ss");
+                pAlarm.AlarmTimeUTC = AlarmP.alarmTimeToUTC(pAlarm.AlarmTime);
                 await AlarmPage.DBAlarms.SaveAlarmAsync(pAlarm);
             }
 

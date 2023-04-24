@@ -1,0 +1,13 @@
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\NUnit3.TestAdapter.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\NUnit3.TestAdapter.pdb
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\nunit.engine.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\nunit.engine.api.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\test-cloud.exe
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\CecilsCallUITest.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\nunit.framework.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\nunit.framework.pdb
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\bin\Release\Xamarin.UITest.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\obj\Release\CecilsCallUITest.csproj.AssemblyReference.cache
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\obj\Release\CecilsCallUITest.csproj.CoreCompileInputs.cache
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\obj\Release\CecilsCallUITest.csproj.CopyComplete
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCallUITest\obj\Release\CecilsCallUITest.dll

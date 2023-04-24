@@ -11,8 +11,9 @@ using Android;
 using AndroidX.Core.App;
 using System;
 using Java.Interop;
-
+using System.Threading.Tasks;
 using Android.Telephony;
+using Java.Nio.Channels;
 
 namespace CecilsCall.Droid
 {
@@ -21,14 +22,17 @@ namespace CecilsCall.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static bool isOnPause = false;
+        public static AndroidCommWithServer commWithInternetServer = new AndroidCommWithServer();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            // Load application
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
+            // Request SMS permission
             RequestSMSpermission();
         }
         protected override void OnPause()
@@ -61,7 +65,6 @@ namespace CecilsCall.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);//
             if (requestCode == 1)
             {
-                Debugger.Msg("Inside OnRequestPermissionsResult");
 
                 // Check if the only required permission has been granted
                 if ((grantResults.Length == 1) && (grantResults[0] == Permission.Granted))
@@ -71,7 +74,7 @@ namespace CecilsCall.Droid
                 }
                 else
                 {
-                    Debugger.Msg("SMS permission is not granted");
+                    Debugger.Msg("SMS permission is NOT granted");
                 }
             }
             else
@@ -92,10 +95,10 @@ namespace CecilsCall.Droid
             Debugger.Msg("Permission is needed");
             ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.SendSms }, 1);
         }
-
         [Export("SendSMSBackdoor")]
         public void SendSMSBackdoor()
         {
+            // SMS is NOT facilitated in AppCenter
             SmsManager.Default.SendTextMessage("0449271275", null, "Test sending SMS.", null, null);
         }
     } // CLASS ENDS

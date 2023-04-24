@@ -2,6 +2,7 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace CecilsCall.Views
 {
@@ -30,17 +31,6 @@ namespace CecilsCall.Views
         {
             InitializeComponent();
         }
-        public static void CheckForInterruptions()
-        {
-            // Sending SMS fails
-
-            numberAlarmInterruptions++;
-            if (numberAlarmInterruptions == 3)// Automate LATER
-            {
-                DependencyService.Get<ISMS>().SendSMStoAssociates("******* " + debugText + " *******");
-                numberAlarmInterruptions = 0;// reset
-            }
-        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -48,18 +38,19 @@ namespace CecilsCall.Views
         }
         public static void AppendLine(string textToAppend)
         {
-            DebugText = DebugText + textToAppend + Environment.NewLine;
+            if (App.isInDebug)
+                DebugText = DebugText + textToAppend + Environment.NewLine;
         }
         void OnEraseMsgsClicked(object sender, EventArgs e)
         {
             DebugText = "";
             OnAppearing();
         }
-        void OnSendMsgsClicked(object sender, EventArgs e)
+        async void OnCopyMsgsClicked(object sender, EventArgs e)
         {
             try
             {
-                DependencyService.Get<ISMS>().SendSMS(Settings.sellersContact, DebugText);
+                await Clipboard.SetTextAsync(debugText);
             }
             catch (Exception err)
             {

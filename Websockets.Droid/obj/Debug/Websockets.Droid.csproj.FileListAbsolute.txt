@@ -1,0 +1,11 @@
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\bin\Debug\Websockets.Droid.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\bin\Debug\Websockets.Droid.pdb
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\bin\Debug\WebSockets.PCL.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\bin\Debug\WebSockets.PCL.pdb
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\MonoAndroid,Version=v13.0.AssemblyAttributes.cs
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\Websockets.Droid.csproj.AssemblyReference.cache
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\stamp\_BuildLibraryImportsCache.stamp
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\Websockets.Droid.csproj.CoreCompileInputs.cache
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\Websockets.Droid.csproj.CopyComplete
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\Websockets.Droid.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\WebSocketPCL\Websockets.Droid\obj\Debug\Websockets.Droid.pdb

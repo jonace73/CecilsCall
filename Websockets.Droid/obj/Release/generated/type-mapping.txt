@@ -1,0 +1,17 @@
+websockets/DroidBridge/BridgeController = Websockets.DroidBridge.BridgeController
+  <init>()V = .ctor()
+  proxy = Proxy
+  Close()V = Close()
+  Open(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V = Open(string, string, System.Collections.Generic.IDictionary<string, string>)
+  Send([B)V = Send(byte[])
+  Send(Ljava/lang/String;)V = Send(string)
+  SetIsAllTrusted()V = SetIsAllTrusted()
+websockets/DroidBridge/BridgeProxy = Websockets.DroidBridge.BridgeProxy
+  <init>()V = .ctor()
+  RaiseClosed()V = RaiseClosed()
+  RaiseData([B)V = RaiseData(byte[])
+  RaiseError(Ljava/lang/Exception;)V = RaiseError(Java.Lang.Exception)
+  RaiseError(Ljava/lang/String;)V = RaiseError(string)
+  RaiseLog(Ljava/lang/String;)V = RaiseLog(string)
+  RaiseMessage(Ljava/lang/String;)V = RaiseMessage(string)
+  RaiseOpened()V = RaiseOpened()

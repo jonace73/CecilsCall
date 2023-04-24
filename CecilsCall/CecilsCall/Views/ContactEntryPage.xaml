@@ -11,23 +11,28 @@
         </StackLayout>
     </Shell.TitleView>
 
-    <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <BoxView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
-        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-            <!-- Layout Contact details -->
+        <StackLayout VerticalOptions="Start">
+            <Label Text="Fill name and number below:" Margin="20,40,20,80" FontSize="Large"/>
+        </StackLayout>
+
+        <!-- Center controls -->
+        <StackLayout VerticalOptions="Center" Orientation="Vertical" HorizontalOptions="Center">
             <Editor AutomationId ="ContactName" x:Name="NameEdit" Placeholder="Enter your friend's name" Text="{Binding name}" HeightRequest="50" />
             <Editor AutomationId ="ContactNumber"  x:Name="NumberEdit" Placeholder="Enter your friend's mobile number" Text="{Binding number}" HeightRequest="50" />
+        </StackLayout>
 
-            <!-- Layout Buttons in two columns -->
+        <!-- Layout Buttons in two columns -->
+        <StackLayout VerticalOptions="End"  Margin="20,40,20,20">
             <Grid ColumnDefinitions="*,*">
                 <Button AutomationId="ContactSave"  Text="Save"
-                Clicked="OnSaveContactButtonClicked" />
+                Clicked="OnSaveContactButtonClicked"  Margin="5"/>
                 <Button Grid.Column="1"
                 Text="Delete"
-                Clicked="OnDeleteContactButtonClicked"/>
+                Clicked="OnDeleteContactButtonClicked" Margin="5"/>
             </Grid>
-
         </StackLayout>
-    </AbsoluteLayout>
+
+    </StackLayout>
 </ContentPage>

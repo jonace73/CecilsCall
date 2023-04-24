@@ -11,27 +11,40 @@
             <Button Text="Save" FontSize="Large" VerticalOptions="Center" HorizontalOptions="End" Clicked="OnSaveSettingsButtonClicked"/>
         </StackLayout>
     </Shell.TitleView>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="0">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-            <!-- Owner's name -->
-            <Label Text="Owner's name:" Margin="20,40,10,0" FontSize="Medium"/>
-            <Editor AutomationId ="OwnerSettings" x:Name="OwnersName" Placeholder ="Your name please" Margin="20,0,10,0" />
+            <!-- Top entries -->
+            <StackLayout VerticalOptions="Start">
 
-            <!-- Maximum alarm repeatition -->
-            <Label Text="Maximum alarm repeatition:"  Margin="20,5,10,0" FontSize="Medium"/>
-            <Editor AutomationId ="RepeatitionsSettings" x:Name="MaxNumberRepeatitions" Placeholder ="1" Margin="20,0,10,0" />
+                <!-- Owner's name -->
+                <Label Text="Owner's name:" Margin="20,40,10,0" FontSize="Medium"/>
+                <Editor AutomationId ="OwnerSettings" x:Name="OwnersName" Placeholder ="Your name please" Margin="20,0,10,0" />
 
-            <!-- Seller's Contact -->
-            <Label Text="Seller's contact:"  Margin="20,5,10,0" FontSize="Medium"/>
-            <Editor AutomationId ="UITestSellersContact" x:Name="SellersContact" Placeholder ="0449271275" Margin="20,0,10,0" />
-            
-            <!-- Debug option -->
-            <Grid ColumnDefinitions="*,*">
-                <Button Text="Debug" Clicked="OnDebugButtonClicked" />
-                <Button Grid.Column="1" Text="No Debug" Clicked="OnNoDebugButtonClicked"/>
-            </Grid>
+                <!-- Maximum alarm repeatition -->
+                <Label Text="Maximum alarm repeatition:"  Margin="20,5,10,0" FontSize="Medium"/>
+                <Editor AutomationId ="RepeatitionsSettings" x:Name="MaxNumberRepeatitions" Placeholder ="1" Margin="20,0,10,0" />
+
+                <!-- Seller's Contact -->
+                <Label Text="Seller's contact:"  Margin="20,5,10,0" FontSize="Medium"/>
+                <Editor AutomationId ="UITestSellersContact" x:Name="SellersContact" Placeholder ="0449271275" Margin="20,0,10,0" />
+
+            </StackLayout>
+
+            <!-- middle controls -->
+            <StackLayout VerticalOptions="CenterAndExpand" />
+
+            <!-- Bottom buttons horizontally arranged -->
+            <StackLayout VerticalOptions="End" Orientation="Horizontal" HorizontalOptions="Center">
+
+                <!-- Send all alarms to server -->
+                <Button Text="Tx_Alarms" Clicked="OnAlarmsToServer" Margin="5" />
+
+                <!-- Debug option -->
+                <Button x:Name="DebugButton" Text="Debug" Clicked="OnDebugButtonClicked" Margin="5" />
+
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

@@ -1,4 +1,4 @@
-﻿#define IS_UNDER_UITEST
+﻿//#define IS_UNDER_UITEST
 
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,7 @@ namespace CecilsCall.Views
 #else
                 alarm = await AlarmPage.DBAlarms.GetAlarmAsync(id);
                 // Display time in timePicker
-                timePicked.Time = TimeSpan.Parse(alarm.Text);
+                timePicked.Time = TimeSpan.Parse(alarm.AlarmTime);
 #endif
             }
             catch (Exception)
@@ -69,7 +69,7 @@ namespace CecilsCall.Views
 #if !IS_UNDER_UITEST
             if (args.PropertyName == "Time")
             {
-                alarm.Text = timePicked.Time.ToString(@"hh\:mm\:ss");
+                alarm.AlarmTime = timePicked.Time.ToString(@"hh\:mm\:ss");
             }
 #endif
         }
@@ -80,20 +80,24 @@ namespace CecilsCall.Views
 #if IS_UNDER_UITEST
                 var alarm = (AlarmP)BindingContext;
 #endif
-                if (!string.IsNullOrWhiteSpace(alarm.Text))
+                if (!string.IsNullOrWhiteSpace(alarm.AlarmTime))
                 {
                     // If alarm time is unique then save else no
                     bool shouldSave = await ShouldSaveAlarm(alarm);
                     if (shouldSave)
                     {
                         alarm.Date = DateTime.UtcNow;
+
+                        // RECORD: UTC time
+                        alarm.AlarmTimeUTC = AlarmP.alarmTimeToUTC(alarm.AlarmTime);
+
                         // Checking alarm saving
 
                         await AlarmPage.DBAlarms.SaveAlarmAsync(alarm);
                     }
                     else
                     {
-                        await DisplayAlert("Error:", TrimAlarmTime(alarm.Text) + " is already present.", "OK");
+                        await DisplayAlert("Error:", TrimAlarmTime(alarm.AlarmTime) + " is already present.", "OK");
                     }
 
                     // Reset Alarm
@@ -123,8 +127,8 @@ namespace CecilsCall.Views
         }
         bool CompareAlarmTimes(AlarmP alarmFromDB, AlarmP inputAlarm)
         {
-            string fromDB = TrimAlarmTime(alarmFromDB.Text);
-            string inAlarm = TrimAlarmTime(inputAlarm.Text);
+            string fromDB = TrimAlarmTime(alarmFromDB.AlarmTime);
+            string inAlarm = TrimAlarmTime(inputAlarm.AlarmTime);
             return fromDB == inAlarm;
         }
         string TrimAlarmTime(string givenTime)

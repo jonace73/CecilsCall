@@ -8,8 +8,7 @@ using CecilsCall.Services;
 using Xamarin.Forms;
 using CecilsCall.Droid.Services;
 using Intent = Android.Content.Intent;
-using System.Collections.Generic;
-using CecilsCall.Views;
+using CecilsCall.Models;
 
 [assembly: Dependency(typeof(AndroidLockScreenAudio))]
 namespace CecilsCall.Droid.Services
@@ -125,7 +124,7 @@ namespace CecilsCall.Droid.Services
                 {
                     case ActionPlay: Play(); break;
                     case ActionStop: Stop(); break;
-                    default: ElliminateAudio(); break;
+                    default: ElliminateAudio(); TxButtonIsTouched(); break;
                 }
             }
             catch (Exception err)
@@ -135,6 +134,19 @@ namespace CecilsCall.Droid.Services
 
             //Set sticky as we are a long running operation
             return StartCommandResult.Sticky;
+        }
+        private async void TxButtonIsTouched()
+        {
+            Debugger.Msg("LSA.TxButtonIsTouched");
+
+            // Send alarm message to server USING current time
+            string localTime = DependencyService.Get<IAlarmClock>().GetCurrentLocalAlarmTime();
+            string UTCtime = AlarmP.alarmTimeToUTC(localTime);
+            string msg = await MessageToServer.JsonMsgToServer(UTCtime);
+            await DependencyService.Get<ICommWithServer>().SendByDependency(msg, "ACKNextToInsertUser");
+
+            // Close connections
+            await DependencyService.Get<ICommWithServer>().CloseConnectionsByDependency();
         }
         private void IntializePlayer()
         {
@@ -153,7 +165,7 @@ namespace CecilsCall.Droid.Services
                 //He/she might be in trouble.
                 player.Completion += (sender, args) =>
                 {
-                    Debugger.Msg("LSA.Completion");
+                    Debugger.Msg("LSA.IntializePlayer: Completion");
 
                     // Play more. The playing will be stopped by 
                     DependencyService.Get<ILockScreenAudio>().FireIntent("com.xamarin.action.PLAY");
@@ -212,7 +224,6 @@ namespace CecilsCall.Droid.Services
 
                 if (player.IsPlaying)
                 {
-                    Debugger.Msg("LSA.Play IsPlaying");
                     return;
                 }
             }
@@ -269,21 +280,17 @@ namespace CecilsCall.Droid.Services
 
                 if (player == null)
                 {
-                    Debugger.Msg("LSA.Stop player == null");
                     return;
                 }
 
                 if (player.IsPlaying)
                 {
-                    Debugger.Msg("LSA.Stop IsPlaying");
                     player.Stop();
                     if (remoteControlClient != null)
                     {
                         remoteControlClient.SetPlaybackState(RemoteControlPlayState.Stopped);
                     }
                 }
-
-                Debugger.Msg("LSA.Stop != null");
 
                 player.Reset();
                 paused = false;

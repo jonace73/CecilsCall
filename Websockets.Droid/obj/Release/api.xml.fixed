@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<api>
+  <package name="websockets.DroidBridge">
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController" static="false" visibility="public">
+      <constructor deprecated="not deprecated" final="false" name="BridgeController" static="false" type="websockets.DroidBridge.BridgeController" visibility="public"></constructor>
+      <method abstract="false" deprecated="not deprecated" final="false" name="Close" native="false" return="void" static="false" synchronized="false" visibility="public"></method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="Open" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+        <parameter name="p1" type="java.lang.String"></parameter>
+        <parameter name="p2" type="java.util.Map&lt;java.lang.String, java.lang.String&gt;"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="Send" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="byte[]"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="Send" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="SetIsAllTrusted" native="false" return="void" static="false" synchronized="false" visibility="public"></method>
+      <field deprecated="not deprecated" final="false" name="proxy" static="false" transient="false" type="websockets.DroidBridge.BridgeProxy" type-generic-aware="websockets.DroidBridge.BridgeProxy" visibility="public" volatile="false"></field>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.1" static="false" visibility="">
+      <implements name="javax.net.ssl.X509TrustManager" name-generic-aware="javax.net.ssl.X509TrustManager"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="checkClientTrusted" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.security.cert.X509Certificate[]"></parameter>
+        <parameter name="p1" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="checkServerTrusted" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.security.cert.X509Certificate[]"></parameter>
+        <parameter name="p1" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="getAcceptedIssuers" native="false" return="java.security.cert.X509Certificate[]" static="false" synchronized="false" visibility="public"></method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.2" static="false" visibility="">
+      <implements name="com.koushikdutta.async.http.AsyncSSLEngineConfigurator" name-generic-aware="com.koushikdutta.async.http.AsyncSSLEngineConfigurator"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="configureEngine" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="javax.net.ssl.SSLEngine"></parameter>
+        <parameter name="p1" type="com.koushikdutta.async.http.AsyncHttpClientMiddleware.GetSocketData"></parameter>
+        <parameter name="p2" type="java.lang.String"></parameter>
+        <parameter name="p3" type="int"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.3" static="false" visibility="">
+      <implements name="javax.net.ssl.HostnameVerifier" name-generic-aware="javax.net.ssl.HostnameVerifier"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="verify" native="false" return="boolean" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+        <parameter name="p1" type="javax.net.ssl.SSLSession"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.4" static="false" visibility="">
+      <implements name="com.koushikdutta.async.http.AsyncHttpClient.WebSocketConnectCallback" name-generic-aware="com.koushikdutta.async.http.AsyncHttpClient.WebSocketConnectCallback"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="onCompleted" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.Exception"></parameter>
+        <parameter name="p1" type="com.koushikdutta.async.http.WebSocket"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.4.1" static="false" visibility="">
+      <implements name="com.koushikdutta.async.callback.CompletedCallback" name-generic-aware="com.koushikdutta.async.callback.CompletedCallback"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="onCompleted" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.Exception"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.4.2" static="false" visibility="">
+      <implements name="com.koushikdutta.async.http.WebSocket.StringCallback" name-generic-aware="com.koushikdutta.async.http.WebSocket.StringCallback"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="onStringAvailable" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeController.4.3" static="false" visibility="">
+      <implements name="com.koushikdutta.async.callback.DataCallback" name-generic-aware="com.koushikdutta.async.callback.DataCallback"></implements>
+      <method abstract="false" deprecated="not deprecated" final="false" name="onDataAvailable" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="com.koushikdutta.async.DataEmitter"></parameter>
+        <parameter name="p1" type="com.koushikdutta.async.ByteBufferList"></parameter>
+      </method>
+    </class>
+    <class abstract="false" deprecated="not deprecated" extends="java.lang.Object" extends-generic-aware="java.lang.Object" final="false" name="BridgeProxy" static="false" visibility="public">
+      <constructor deprecated="not deprecated" final="false" name="BridgeProxy" static="false" type="websockets.DroidBridge.BridgeProxy" visibility="public"></constructor>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseClosed" native="false" return="void" static="false" synchronized="false" visibility="public"></method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseData" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="byte[]"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseError" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.Exception"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseError" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseLog" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseMessage" native="false" return="void" static="false" synchronized="false" visibility="public">
+        <parameter name="p0" type="java.lang.String"></parameter>
+      </method>
+      <method abstract="false" deprecated="not deprecated" final="false" name="RaiseOpened" native="false" return="void" static="false" synchronized="false" visibility="public"></method>
+    </class>
+  </package>
+</api>

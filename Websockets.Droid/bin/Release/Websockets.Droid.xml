@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Websockets.Droid</name>
+    </assembly>
+    <members>
+        <member name="T:Websockets.Droid.WebsocketConnection">
+            <summary>
+            A Websocket connection via androidBridge application
+            </summary>
+        </member>
+        <member name="M:Websockets.Droid.WebsocketConnection.Link">
+            <summary>
+            Factory Initializer
+            </summary>
+        </member>
+    </members>
+</doc>

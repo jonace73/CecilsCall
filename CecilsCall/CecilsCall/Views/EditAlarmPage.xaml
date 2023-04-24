@@ -21,7 +21,7 @@
             <Label x:Name="timeCurrent" Margin="40,0,20,40" FontAttributes="Bold" FontSize="Large" />
 
             <!-- Automatic Setting button -->
-            <Button x:Name="autoTimeSet" Margin="20" Text="Auto Alarm Time Setting" Clicked="OnSettingButtonClicked" IsVisible="false" />
+            <Button x:Name="autoTimeSet" Margin="20" Text="Auto Alarm Time Setting" Clicked="OnAutoSettingButtonClicked" IsVisible="false" />
 
             <!-- Display Alarms in the database in a list -->
             <CollectionView x:Name="collectionView" Margin="20,2,5,2" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
@@ -37,7 +37,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding ID}" FontSize="Large"/>
                                 <Label Text=":  " FontSize="Large"/>
-                                <Label Text="{Binding Text}" FontSize="Large"/>
+                                <Label Text="{Binding AlarmTime}" FontSize="Large"/>
                             </StackLayout>
                             <Label Text="{Binding Date}" TextColor="Silver" FontSize="Small" />
                         </StackLayout>

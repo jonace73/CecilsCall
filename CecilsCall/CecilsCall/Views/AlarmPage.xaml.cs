@@ -11,6 +11,7 @@ namespace CecilsCall.Views
     {
         static int mNumberOfTicks = 0;
         static bool mContinueTimer = true;
+        static bool mSendSMS = true;
         public static bool isAlarming = false;
         static AlarmDatabase dbAlarms;
         public static AlarmDatabase DBAlarms
@@ -49,7 +50,7 @@ namespace CecilsCall.Views
             if (alarmP != null)
             {
                 AlarmLabel.Text = "Next alarm at:";
-                NextAlarm.Text = alarmP.Text;
+                NextAlarm.Text = alarmP.AlarmTime;
             } else
             {
                 AlarmLabel.Text = "Please click 'Edit' to enter an alarm.";
@@ -61,13 +62,21 @@ namespace CecilsCall.Views
             // Remove and reset
             CleanUp();// OnKillPageButtonClicked
 
+            // When user click to stop alarm
+            // Send alarm message to server USING current time
+            string localTime = DependencyService.Get<IAlarmClock>().GetCurrentLocalAlarmTime();
+            string UTCtime = AlarmP.alarmTimeToUTC(localTime);
+            string msg = await MessageToServer.JsonMsgToServer(UTCtime);
+            await DependencyService.Get<ICommWithServer>().SendByDependency(msg, "ACKNextToInsertUser");
+
+            // Close connections
+            await DependencyService.Get<ICommWithServer>().CloseConnectionsByDependency();
+
             // Pop this page from the modal stack
             await Navigation.PopModalAsync();
         }
         private void CleanUp()
         {
-            DebugPage.AppendLine("***** CleanUp() *****");
-
             if (isAlarming)
             {
                 isAlarming = false;
@@ -76,6 +85,8 @@ namespace CecilsCall.Views
             {
                 return;
             }
+
+            DebugPage.AppendLine("***** CleanUp() *****");
 
             // Inactivate button
             DisplayButton(false);
@@ -140,7 +151,7 @@ namespace CecilsCall.Views
             // This method is called to stop the remaining timer
 
             // Stop alarm time counter
-            mContinueTimer = false;
+            mSendSMS = false;
 
             // Reset remaining time
             mNumberOfTicks = 0;
@@ -149,21 +160,24 @@ namespace CecilsCall.Views
         {
             int alarmDuration = await DependencyService.Get<IAudioDuration>().GetAudioDuration();
             remainingTime.IsVisible = true;//Display remaining time
+            mSendSMS = true;
 
             // Start timer
             Device.StartTimer(new TimeSpan(0, 0, 1), () =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    int remainingTime = alarmDuration - mNumberOfTicks++;
-                    mContinueTimer = remainingTime > 0;
+                    int remainingTimeValue = alarmDuration - mNumberOfTicks++;
+                    mContinueTimer = remainingTimeValue > 0;
 
                     if (mContinueTimer)
                     {
-                        DisplayRemainingTime(remainingTime);
+                        DisplayRemainingTime(remainingTimeValue);
                     }
                     else
                     {
+                        if (!mSendSMS) return;
+
                         // Send SMS to associates
                         DependencyService.Get<ISMS>().SendSMStoAssociates(Settings.ownersName);
 
@@ -179,7 +193,7 @@ namespace CecilsCall.Views
                 });
 
                 // runs again, or false to stop
-                return mContinueTimer;
+                return mContinueTimer && mSendSMS;
             });
         }
     }

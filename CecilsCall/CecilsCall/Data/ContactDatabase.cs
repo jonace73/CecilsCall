@@ -42,5 +42,12 @@ namespace CecilsCall.Data
             // Delete a Contact.
             return contactDB.DeleteAsync(contact);
         }
-    }
+        public Task<Contact> GetContactByNonIDAsync(string name, string number)
+        {
+            // Get a specific Contact.
+            return contactDB.Table<Contact>()
+            .Where(i => i.name == name && i.number == number)
+            .FirstOrDefaultAsync();
+        }
+    } // END OF CLASS
 }

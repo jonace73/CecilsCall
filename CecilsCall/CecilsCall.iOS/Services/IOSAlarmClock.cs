@@ -14,6 +14,10 @@ namespace CecilsCall.iOS.Services
         {
 
         }
+        public string GetCurrentLocalAlarmTime()
+        {
+            return "";
+        }
         public void CancelAlarm(string ID, string requestCode)
         {
 

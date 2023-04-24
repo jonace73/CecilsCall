@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Crashes">
+      <Version>5.0.1</Version>
+    </PackageReference>
     <PackageReference Include="NUnit">
       <Version>3.13.3</Version>
     </PackageReference>
@@ -88,6 +94,7 @@
     <Compile Include="Services\AndroidAudioDuration.cs" />
     <Compile Include="Services\AndroidLockScreenAudio.cs" />
     <Compile Include="Services\AndroidSMS.cs" />
+    <Compile Include="Services\AndroidCommWithServer.cs" />
     <Compile Include="Services\Debugger.cs" />
     <Compile Include="Services\RemoteLockScreenControlReceiver.cs" />
     <Compile Include="Services\SleepModeHandlerForDroid.cs" />
@@ -114,6 +121,14 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Websockets.Droid\Websockets.Droid.csproj">
+      <Project>{0a65c595-9e17-487c-a880-a11da9751d89}</Project>
+      <Name>Websockets.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Websockets\Websockets.csproj">
+      <Project>{91ea9235-c355-473f-a6bb-7b29fd2e3af1}</Project>
+      <Name>Websockets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CecilsCall\CecilsCall.csproj">
       <Project>{0722F4A2-548C-438A-9230-4F5E43D5430F}</Project>
       <Name>CecilsCall</Name>

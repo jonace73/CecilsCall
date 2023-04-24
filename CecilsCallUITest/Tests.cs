@@ -26,8 +26,8 @@ namespace CecilsCallUITest
         [Test]
         public void TestCecilsCall()
         {
-            PermitSMS();
-            app.Invoke("SendSMSBackdoor");/*/
+            CheckVersion();
+            // PermitSMS(); NOT facilitated in AppCenter
             FillSettings("Noli",3);
             AddContact("Jon Anderson","0449271275");
             AddAlarms();
@@ -35,12 +35,18 @@ namespace CecilsCallUITest
             WaitThenTap("Debug");
             app.Screenshot("Resulting debug");//*/
         }
+        private void CheckVersion()
+        {
+            app.WaitForElement(c => c.Marked("OK"));
+            app.Screenshot("Device version");
+        }
         private void PermitSMS()
         {
             Task.Delay(3000);
             WaitThenTap("Debug");
             app.Screenshot("PermitSMS");
             //app.Tap(c => c.Marked("ALLOW"));
+            app.Invoke("SendSMSBackdoor");
         }
         private void FillSettings(string ownersName, int numberRepeatitions)
         {

@@ -11,22 +11,29 @@
             <Label Text="Alarm Entry" FontSize="Large" VerticalOptions="Center"/>
         </StackLayout>
     </Shell.TitleView>
-    
-    <!-- Layout children vertically -->
-    <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <BoxView AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
-        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.5, 0.25, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
 
+    <!-- Layout children vertically -->
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+        <!-- Start label -->
+        <StackLayout VerticalOptions="Start">
+            <Label Text="Click time below to choose alarm time:" Margin="20,40,20,80" FontSize="Large"/>
+        </StackLayout>
+
+        <!-- Center controls -->
+        <StackLayout VerticalOptions="Center" Orientation="Vertical" HorizontalOptions="Center">
             <TimePicker AutomationId ="MyTimePicker"  x:Name="timePicked" Time="0:0:0" Format="T" PropertyChanged="OnTimePickerPropertyChanged" IsVisible="true" />
             <Editor AutomationId ="EnterAlarmEditor" x:Name="timeEditor" Placeholder="HH:MM:SS" Text="{Binding Text}" HeightRequest="50" IsVisible="true" />
-            
-            <!-- Layout Buttons in two columns -->
-            <Grid ColumnDefinitions="*,*">
-                <Button AutomationId="ButtonSave"  Text="Save" Clicked="OnSaveButtonClicked" />
-                <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"/>
-            </Grid>
-
         </StackLayout>
-    </AbsoluteLayout>
-    
+
+        <!-- Layout Buttons in two columns -->
+        <StackLayout VerticalOptions="End"  Margin="20,40,20,20">
+            <Grid ColumnDefinitions="*,*">
+                <Button AutomationId="ButtonSave"  Text="Save" Clicked="OnSaveButtonClicked" Margin="5" />
+                <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" Margin="5"/>
+            </Grid>
+        </StackLayout>
+
+    </StackLayout>
+
 </ContentPage>

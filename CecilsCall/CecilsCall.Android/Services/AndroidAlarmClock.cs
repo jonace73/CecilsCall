@@ -16,6 +16,7 @@ namespace CecilsCall.Droid.Services
 {
     internal class AndroidAlarmClock : IAlarmClock
     {
+        public static string currentLocalAlarmTime;
         public static AlarmP oldAlarm = null;
         static DetectShake vDetectShake;
         public static DetectShake gDetectShake
@@ -31,10 +32,13 @@ namespace CecilsCall.Droid.Services
         }
         public void SetAlarm(AlarmP alarm)
         {
-            Debugger.Msg("AlarmClock.SetAlarm: " + alarm.ID + " alarm time: " + alarm.Text);
+            Debugger.Msg("AlarmClock.SetAlarm: " + alarm.ID + " alarm time: " + alarm.AlarmTime);
 
             try
             {
+                // Save current Local Alarm Time
+                currentLocalAlarmTime = alarm.AlarmTime;
+
                 Intent alarmIntent = new Intent(Android.App.Application.Context, typeof(AlarmReceiver));
                 alarmIntent.SetFlags(ActivityFlags.IncludeStoppedPackages);
                 alarmIntent.PutExtra("id", alarm.getIDasString());
@@ -52,6 +56,9 @@ namespace CecilsCall.Droid.Services
                 string shortMsg = msg.Remove(0, 65);//*/
                 Debugger.Msg("LSA.SetAlarm ERROR: " + err.Message);
             }
+        }
+        public string GetCurrentLocalAlarmTime() {
+            return currentLocalAlarmTime;
         }
         public void CancelAlarm(string ID, string requestCode)
         {
@@ -155,19 +162,34 @@ namespace CecilsCall.Droid.Services
     public class AlarmReceiver : BroadcastReceiver
     {
         public static bool isScreenOff = false;
-        public override void OnReceive(Android.Content.Context context, Intent intent)
+        public async override void OnReceive(Android.Content.Context context, Intent intent)
         {
-            Debugger.Msg("AlarmReceiver.Received on: " + DateTime.Now.ToString("HH:mm:ss"));
 
             // Signal system that alarm is on. DON'T TRANSFER THIS CODE
             AlarmPage.isAlarming = true;
             isScreenOff = PowerAwaker.IsScreenOff();
-            Debugger.Msg("AlarmReceiver.OnReceive() IsScreenOff: " + isScreenOff);
+            Debugger.Msg("AlarmReceiver.Received on: " + DateTime.Now.ToString("HH:mm:ss") +" IsScreenOff: " + isScreenOff);
 
-            // Do the alerting
+            // Vibrate
             Vibrate(5000);
+
+            // Wake up screen
             WakeUp(context, intent);
-            RingBell(context);
+
+            // Sound the alarm
+            SoundAlarm(context);
+        }
+        private async static Task<string> GetAlarmTime(Intent intent)
+        {
+            // Get Alarm ID
+            var idString = (string)intent.Extras.Get("id");
+            int id = Convert.ToInt32(idString);
+
+            // Retreive database
+            AlarmP alarm = await AlarmPage.DBAlarms.GetAlarmAsync(id);
+
+            // NOTE: UTC time is sent to the SERVER
+            return alarm.AlarmTimeUTC;
         }
         private void Vibrate(long duration)
         {
@@ -202,7 +224,7 @@ namespace CecilsCall.Droid.Services
             }
         }
         [System.Obsolete]
-        private void RingBell(Android.Content.Context context)
+        private void SoundAlarm(Android.Content.Context context)
         {
             Debugger.Msg("<<<<< AlarmReceiver.RingBell >>>>>");
             try
