@@ -78,7 +78,7 @@ target triple = "aarch64-unknown-linux-android"
 @__app_environment_variables_n_0.0 = internal constant [15 x i8] c"MONO_GC_PARAMS\00", align 1
 @__app_environment_variables_v_0.1 = internal constant [21 x i8] c"major=marksweep-conc\00", align 1
 @__app_environment_variables_n_1.2 = internal constant [17 x i8] c"XAMARIN_BUILD_ID\00", align 1
-@__app_environment_variables_v_1.3 = internal constant [37 x i8] c"1f04881d-bba1-4c3e-a157-fcaf60269cc5\00", align 1
+@__app_environment_variables_v_1.3 = internal constant [37 x i8] c"9a3ca3d2-12ad-418d-b556-46be4663cc9b\00", align 1
 @__app_environment_variables_n_2.4 = internal constant [28 x i8] c"XA_HTTP_CLIENT_HANDLER_TYPE\00", align 1
 @__app_environment_variables_v_2.5 = internal constant [41 x i8] c"Xamarin.Android.Net.AndroidClientHandler\00", align 1
 @__app_environment_variables_n_3.6 = internal constant [16 x i8] c"XA_TLS_PROVIDER\00", align 1

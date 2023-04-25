@@ -1,5 +1,6 @@
 ﻿using CecilsCall.Models;
 using CecilsCall.Services;
+using Microsoft.AppCenter.Analytics;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,13 @@ namespace CecilsCall.Views
         }
         public async void OnAlarmsToServer(object sender, EventArgs e)
         {
+            bool isEnabled = await Analytics.IsEnabledAsync();
+            DebugPage.AppendLine("Analytics isEnabled: " + isEnabled);// Prints isEnabled value on the app screen
+            if (isEnabled)
+            {
+                Analytics.TrackEvent("OnAlarmsToServer clicked");
+            }
+
             // Send Dummy alarmTime
             string dummyAlarmTime = await MessageToServer.JsonMsgToServer("07:30:00");
             bool IsThereEcho = await DependencyService.Get<ICommWithServer>().SendByDependency(dummyAlarmTime, "ACKNextToInsertUser");
