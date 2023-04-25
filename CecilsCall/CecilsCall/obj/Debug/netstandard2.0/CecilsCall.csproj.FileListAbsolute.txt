@@ -20,3 +20,10 @@ C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\obj\Debug\netstandard2.0\refint\CecilsCall.dll
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\obj\Debug\netstandard2.0\CecilsCall.pdb
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\obj\Debug\netstandard2.0\ref\CecilsCall.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\test-cloud.exe
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\NUnit3.TestAdapter.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\NUnit3.TestAdapter.pdb
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\nunit.engine.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\nunit.engine.api.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\nunit.engine.core.dll
+C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall\bin\Debug\netstandard2.0\testcentric.engine.metadata.dll

@@ -10,6 +10,96 @@ cecilscall.droid.services.AndroidLockScreenAudio;crc640322430c9819ddce.AndroidLo
 CecilsCall.Droid.Services.RemoteLockScreenControlReceiver, CecilsCall.Android;crc640322430c9819ddce.RemoteLockScreenControlReceiver
 CecilsCall.Droid.Services.RemoteLockScreenControlReceiver;crc640322430c9819ddce.RemoteLockScreenControlReceiver
 cecilscall.droid.services.RemoteLockScreenControlReceiver;crc640322430c9819ddce.RemoteLockScreenControlReceiver
+Microsoft.AppCenter.Analytics.Android.AuthenticationProvider+IAuthenticationCallback, Microsoft.AppCenter.Analytics;com.microsoft.appcenter.analytics.AuthenticationProvider$AuthenticationCallback
+Microsoft.AppCenter.Analytics.Android.AuthenticationProvider.IAuthenticationCallback;com.microsoft.appcenter.analytics.AuthenticationProvider$AuthenticationCallback
+com.microsoft.appcenter.analytics.AuthenticationProvider$AuthenticationCallback;com.microsoft.appcenter.analytics.AuthenticationProvider$AuthenticationCallback
+Microsoft.AppCenter.Analytics.Android.AuthenticationProvider+ITokenProvider, Microsoft.AppCenter.Analytics;com.microsoft.appcenter.analytics.AuthenticationProvider$TokenProvider
+Microsoft.AppCenter.Analytics.Android.AuthenticationProvider.ITokenProvider;com.microsoft.appcenter.analytics.AuthenticationProvider$TokenProvider
+com.microsoft.appcenter.analytics.AuthenticationProvider$TokenProvider;com.microsoft.appcenter.analytics.AuthenticationProvider$TokenProvider
+Microsoft.AppCenter.Analytics.Android.Channel.IAnalyticsListener, Microsoft.AppCenter.Analytics;com.microsoft.appcenter.analytics.channel.AnalyticsListener
+Microsoft.AppCenter.Analytics.Android.Channel.IAnalyticsListener;com.microsoft.appcenter.analytics.channel.AnalyticsListener
+com.microsoft.appcenter.analytics.channel.AnalyticsListener;com.microsoft.appcenter.analytics.channel.AnalyticsListener
+Microsoft.AppCenter.Analytics.Android.Channel.IAnalyticsListenerImplementor, Microsoft.AppCenter.Analytics;mono.com.microsoft.appcenter.analytics.channel.AnalyticsListenerImplementor
+Microsoft.AppCenter.Analytics.Android.Channel.IAnalyticsListenerImplementor;mono.com.microsoft.appcenter.analytics.channel.AnalyticsListenerImplementor
+mono.com.microsoft.appcenter.analytics.channel.AnalyticsListenerImplementor;mono.com.microsoft.appcenter.analytics.channel.AnalyticsListenerImplementor
+Microsoft.AppCenter.Crashes.Crashes+AndroidCrashListener, Microsoft.AppCenter.Crashes;crc64a4555f9f70c213ae.Crashes_AndroidCrashListener
+Microsoft.AppCenter.Crashes.Crashes.AndroidCrashListener;crc64a4555f9f70c213ae.Crashes_AndroidCrashListener
+microsoft.appcenter.crashes.Crashes_AndroidCrashListener;crc64a4555f9f70c213ae.Crashes_AndroidCrashListener
+Microsoft.AppCenter.Crashes.Android.ICrashesListener, Microsoft.AppCenter.Crashes;com.microsoft.appcenter.crashes.CrashesListener
+Microsoft.AppCenter.Crashes.Android.ICrashesListener;com.microsoft.appcenter.crashes.CrashesListener
+com.microsoft.appcenter.crashes.CrashesListener;com.microsoft.appcenter.crashes.CrashesListener
+Microsoft.AppCenter.Crashes.Android.ICrashesListenerImplementor, Microsoft.AppCenter.Crashes;mono.com.microsoft.appcenter.crashes.CrashesListenerImplementor
+Microsoft.AppCenter.Crashes.Android.ICrashesListenerImplementor;mono.com.microsoft.appcenter.crashes.CrashesListenerImplementor
+mono.com.microsoft.appcenter.crashes.CrashesListenerImplementor;mono.com.microsoft.appcenter.crashes.CrashesListenerImplementor
+Microsoft.AppCenter.AndroidHttpClientAdapter, Microsoft.AppCenter;crc64350623dcb797cc38.AndroidHttpClientAdapter
+Microsoft.AppCenter.AndroidHttpClientAdapter;crc64350623dcb797cc38.AndroidHttpClientAdapter
+microsoft.appcenter.AndroidHttpClientAdapter;crc64350623dcb797cc38.AndroidHttpClientAdapter
+Microsoft.AppCenter.ServiceCall, Microsoft.AppCenter;crc64350623dcb797cc38.ServiceCall
+Microsoft.AppCenter.ServiceCall;crc64350623dcb797cc38.ServiceCall
+microsoft.appcenter.ServiceCall;crc64350623dcb797cc38.ServiceCall
+Microsoft.AppCenter.Android.IAppCenterHandler, Microsoft.AppCenter;com.microsoft.appcenter.AppCenterHandler
+Microsoft.AppCenter.Android.IAppCenterHandler;com.microsoft.appcenter.AppCenterHandler
+com.microsoft.appcenter.AppCenterHandler;com.microsoft.appcenter.AppCenterHandler
+Microsoft.AppCenter.Android.IAppCenterService, Microsoft.AppCenter;com.microsoft.appcenter.AppCenterService
+Microsoft.AppCenter.Android.IAppCenterService;com.microsoft.appcenter.AppCenterService
+com.microsoft.appcenter.AppCenterService;com.microsoft.appcenter.AppCenterService
+Microsoft.AppCenter.Android.Utils.ApplicationLifecycleListener+IApplicationLifecycleCallbacks, Microsoft.AppCenter;com.microsoft.appcenter.utils.ApplicationLifecycleListener$ApplicationLifecycleCallbacks
+Microsoft.AppCenter.Android.Utils.ApplicationLifecycleListener.IApplicationLifecycleCallbacks;com.microsoft.appcenter.utils.ApplicationLifecycleListener$ApplicationLifecycleCallbacks
+com.microsoft.appcenter.utils.ApplicationLifecycleListener$ApplicationLifecycleCallbacks;com.microsoft.appcenter.utils.ApplicationLifecycleListener$ApplicationLifecycleCallbacks
+Microsoft.AppCenter.Android.Utils.Async.IAppCenterConsumer, Microsoft.AppCenter;com.microsoft.appcenter.utils.async.AppCenterConsumer
+Microsoft.AppCenter.Android.Utils.Async.IAppCenterConsumer;com.microsoft.appcenter.utils.async.AppCenterConsumer
+com.microsoft.appcenter.utils.async.AppCenterConsumer;com.microsoft.appcenter.utils.async.AppCenterConsumer
+Microsoft.AppCenter.Android.Utils.Async.IAppCenterFuture, Microsoft.AppCenter;com.microsoft.appcenter.utils.async.AppCenterFuture
+Microsoft.AppCenter.Android.Utils.Async.IAppCenterFuture;com.microsoft.appcenter.utils.async.AppCenterFuture
+com.microsoft.appcenter.utils.async.AppCenterFuture;com.microsoft.appcenter.utils.async.AppCenterFuture
+Microsoft.AppCenter.Android.Ingestion.IIngestion, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.Ingestion
+Microsoft.AppCenter.Android.Ingestion.IIngestion;com.microsoft.appcenter.ingestion.Ingestion
+com.microsoft.appcenter.ingestion.Ingestion;com.microsoft.appcenter.ingestion.Ingestion
+Microsoft.AppCenter.Android.Ingestion.Models.ILog, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.models.Log
+Microsoft.AppCenter.Android.Ingestion.Models.ILog;com.microsoft.appcenter.ingestion.models.Log
+com.microsoft.appcenter.ingestion.models.Log;com.microsoft.appcenter.ingestion.models.Log
+Microsoft.AppCenter.Android.Ingestion.Models.IModel, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.models.Model
+Microsoft.AppCenter.Android.Ingestion.Models.IModel;com.microsoft.appcenter.ingestion.models.Model
+com.microsoft.appcenter.ingestion.models.Model;com.microsoft.appcenter.ingestion.models.Model
+Microsoft.AppCenter.Android.Ingestion.Models.Json.ILogFactory, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.models.json.LogFactory
+Microsoft.AppCenter.Android.Ingestion.Models.Json.ILogFactory;com.microsoft.appcenter.ingestion.models.json.LogFactory
+com.microsoft.appcenter.ingestion.models.json.LogFactory;com.microsoft.appcenter.ingestion.models.json.LogFactory
+Microsoft.AppCenter.Android.Ingestion.Models.Json.ILogSerializer, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.models.json.LogSerializer
+Microsoft.AppCenter.Android.Ingestion.Models.Json.ILogSerializer;com.microsoft.appcenter.ingestion.models.json.LogSerializer
+com.microsoft.appcenter.ingestion.models.json.LogSerializer;com.microsoft.appcenter.ingestion.models.json.LogSerializer
+Microsoft.AppCenter.Android.Ingestion.Models.Json.IModelFactory, Microsoft.AppCenter;com.microsoft.appcenter.ingestion.models.json.ModelFactory
+Microsoft.AppCenter.Android.Ingestion.Models.Json.IModelFactory;com.microsoft.appcenter.ingestion.models.json.ModelFactory
+com.microsoft.appcenter.ingestion.models.json.ModelFactory;com.microsoft.appcenter.ingestion.models.json.ModelFactory
+Microsoft.AppCenter.Android.Http.IHttpClientCallTemplate, Microsoft.AppCenter;com.microsoft.appcenter.http.HttpClient$CallTemplate
+Microsoft.AppCenter.Android.Http.IHttpClientCallTemplate;com.microsoft.appcenter.http.HttpClient$CallTemplate
+com.microsoft.appcenter.http.HttpClient$CallTemplate;com.microsoft.appcenter.http.HttpClient$CallTemplate
+Microsoft.AppCenter.Android.Http.IHttpClient, Microsoft.AppCenter;com.microsoft.appcenter.http.HttpClient
+Microsoft.AppCenter.Android.Http.IHttpClient;com.microsoft.appcenter.http.HttpClient
+com.microsoft.appcenter.http.HttpClient;com.microsoft.appcenter.http.HttpClient
+Microsoft.AppCenter.Android.Http.IServiceCall, Microsoft.AppCenter;com.microsoft.appcenter.http.ServiceCall
+Microsoft.AppCenter.Android.Http.IServiceCall;com.microsoft.appcenter.http.ServiceCall
+com.microsoft.appcenter.http.ServiceCall;com.microsoft.appcenter.http.ServiceCall
+Microsoft.AppCenter.Android.Http.IServiceCallback, Microsoft.AppCenter;com.microsoft.appcenter.http.ServiceCallback
+Microsoft.AppCenter.Android.Http.IServiceCallback;com.microsoft.appcenter.http.ServiceCallback
+com.microsoft.appcenter.http.ServiceCallback;com.microsoft.appcenter.http.ServiceCallback
+Microsoft.AppCenter.Android.Channel.IChannelGroupListener, Microsoft.AppCenter;com.microsoft.appcenter.channel.Channel$GroupListener
+Microsoft.AppCenter.Android.Channel.IChannelGroupListener;com.microsoft.appcenter.channel.Channel$GroupListener
+com.microsoft.appcenter.channel.Channel$GroupListener;com.microsoft.appcenter.channel.Channel$GroupListener
+Microsoft.AppCenter.Android.Channel.IChannelGroupListenerImplementor, Microsoft.AppCenter;mono.com.microsoft.appcenter.channel.Channel_GroupListenerImplementor
+Microsoft.AppCenter.Android.Channel.IChannelGroupListenerImplementor;mono.com.microsoft.appcenter.channel.Channel_GroupListenerImplementor
+mono.com.microsoft.appcenter.channel.Channel_GroupListenerImplementor;mono.com.microsoft.appcenter.channel.Channel_GroupListenerImplementor
+Microsoft.AppCenter.Android.Channel.IChannelListener, Microsoft.AppCenter;com.microsoft.appcenter.channel.Channel$Listener
+Microsoft.AppCenter.Android.Channel.IChannelListener;com.microsoft.appcenter.channel.Channel$Listener
+com.microsoft.appcenter.channel.Channel$Listener;com.microsoft.appcenter.channel.Channel$Listener
+Microsoft.AppCenter.Android.Channel.IChannelListenerImplementor, Microsoft.AppCenter;mono.com.microsoft.appcenter.channel.Channel_ListenerImplementor
+Microsoft.AppCenter.Android.Channel.IChannelListenerImplementor;mono.com.microsoft.appcenter.channel.Channel_ListenerImplementor
+mono.com.microsoft.appcenter.channel.Channel_ListenerImplementor;mono.com.microsoft.appcenter.channel.Channel_ListenerImplementor
+Microsoft.AppCenter.Android.Channel.IChannel, Microsoft.AppCenter;com.microsoft.appcenter.channel.Channel
+Microsoft.AppCenter.Android.Channel.IChannel;com.microsoft.appcenter.channel.Channel
+com.microsoft.appcenter.channel.Channel;com.microsoft.appcenter.channel.Channel
+Websockets.Droid.WebsocketConnection, Websockets.Droid;crc64b8ba6c799a727b83.WebsocketConnection
+Websockets.Droid.WebsocketConnection;crc64b8ba6c799a727b83.WebsocketConnection
+websockets.droid.WebsocketConnection;crc64b8ba6c799a727b83.WebsocketConnection
 AndroidX.Activity.IOnBackPressedDispatcherOwner, Xamarin.AndroidX.Activity;androidx.activity.OnBackPressedDispatcherOwner
 AndroidX.Activity.IOnBackPressedDispatcherOwner;androidx.activity.OnBackPressedDispatcherOwner
 androidx.activity.OnBackPressedDispatcherOwner;androidx.activity.OnBackPressedDispatcherOwner

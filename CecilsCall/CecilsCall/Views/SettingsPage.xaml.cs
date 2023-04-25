@@ -1,6 +1,7 @@
 ﻿using CecilsCall.Models;
 using CecilsCall.Services;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,11 @@ namespace CecilsCall.Views
         }
         async void OnSaveSettingsButtonClicked(object sender, EventArgs e)
 		{
+
+            Crashes.GenerateTestCrash();
+
             // Copy input info
-			ownersName = OwnersName.Text;
+            ownersName = OwnersName.Text;
             sellersContact = SellersContact.Text;
 
             // Check for Maximum number of repeatitions as integer
@@ -44,15 +48,22 @@ namespace CecilsCall.Views
                 await DisplayAlert("Error:", "Maximum number of repeatition is not an integer.", "OK");
             }
         }
-        public async void OnAlarmsToServer(object sender, EventArgs e)
+        public async void OnCrashButtonClicked(object sender, EventArgs e)
         {
             bool isEnabled = await Analytics.IsEnabledAsync();
-            DebugPage.AppendLine("Analytics isEnabled: " + isEnabled);// Prints isEnabled value on the app screen
-            if (isEnabled)
-            {
-                Analytics.TrackEvent("OnAlarmsToServer clicked");
-            }
+            DebugPage.AppendLine("Analytics isEnabled: " + isEnabled);// Analytics.TrackEvent("OnAlarmsToServer clicked");
+            if (!isEnabled) return;
 
+            bool didAppCrash = await Crashes.HasCrashedInLastSessionAsync();
+            if (didAppCrash)
+            {
+                ErrorReport crashReport = await Crashes.GetLastSessionCrashReportAsync();
+                DebugPage.AppendLine("Last CrashReport: " + crashReport.StackTrace);
+                // Send this same report to WhizKod server
+            }
+        }
+        public async void OnAlarmsToServer(object sender, EventArgs e)
+        {
             // Send Dummy alarmTime
             string dummyAlarmTime = await MessageToServer.JsonMsgToServer("07:30:00");
             bool IsThereEcho = await DependencyService.Get<ICommWithServer>().SendByDependency(dummyAlarmTime, "ACKNextToInsertUser");

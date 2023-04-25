@@ -14,6 +14,7 @@ public class MainActivity
 			"n_onPause:()V:GetOnPauseHandler\n" +
 			"n_onResume:()V:GetOnResumeHandler\n" +
 			"n_onRequestPermissionsResult:(I[Ljava/lang/String;[I)V:GetOnRequestPermissionsResult_IarrayLjava_lang_String_arrayIHandler\n" +
+			"n_SendSMSBackdoor:()V:__export__\n" +
 			"";
 		mono.android.Runtime.register ("CecilsCall.Droid.MainActivity, CecilsCall.Android", MainActivity.class, __md_methods);
 	}
@@ -67,6 +68,14 @@ public class MainActivity
 	}
 
 	private native void n_onRequestPermissionsResult (int p0, java.lang.String[] p1, int[] p2);
+
+
+	public void SendSMSBackdoor ()
+	{
+		n_SendSMSBackdoor ();
+	}
+
+	private native void n_SendSMSBackdoor ();
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)

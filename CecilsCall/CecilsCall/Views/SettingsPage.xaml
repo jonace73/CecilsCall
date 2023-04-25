@@ -44,6 +44,9 @@
                 <!-- Debug option -->
                 <Button x:Name="DebugButton" Text="Debug" Clicked="OnDebugButtonClicked" Margin="5" />
 
+                <!-- Crash checking -->
+                <Button x:Name="CrashButton" Text="Crash" Clicked="OnCrashButtonClicked" Margin="5" />
+
             </StackLayout>
 
         </StackLayout>

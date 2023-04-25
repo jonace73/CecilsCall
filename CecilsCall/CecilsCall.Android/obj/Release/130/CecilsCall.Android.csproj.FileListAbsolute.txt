@@ -507,4 +507,3 @@ C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall.
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall.Android\obj\Release\130\android\src\mono\com\microsoft\appcenter\channel\Channel_GroupListenerImplementor.java
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall.Android\obj\Release\130\android\src\mono\com\microsoft\appcenter\channel\Channel_ListenerImplementor.java
 C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall.Android\obj\Release\130\android\src\mono\com\microsoft\appcenter\crashes\CrashesListenerImplementor.java
-C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\CecilsCall\CecilsCall.Android\bin\Release\Websockets.Droid.dll.mdb

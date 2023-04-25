@@ -9,7 +9,7 @@
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\mscorlib.dll"
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Core.dll"
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.dll"
---ref="C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\Websockets\bin\Release\netstandard2.0\Websockets.dll"
+--ref="C:\ManuelAbello\MindTechnical\Programs\Xamarin\CecilsCall\Websockets\bin\Debug\netstandard2.0\Websockets.dll"
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\Microsoft.Win32.Primitives.dll"
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\Microsoft.Win32.Registry.AccessControl.dll"
 --ref="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\Microsoft.Win32.Registry.dll"
