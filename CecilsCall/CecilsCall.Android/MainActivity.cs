@@ -32,6 +32,12 @@ namespace CecilsCall.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
+            // To avoid: "You must call Xamarin.Forms.Forms.Init(); prior to using this property."
+            // An error fired due to: DependencyService.Get<ILockScreenAudio>().FireIntent("com.xamarin.action.PLAY");
+            // called in AlarmReceiver.SoundAlarm
+            // This SEEMS to solve the problem
+            Xamarin.Forms.DependencyService.Register<ILockScreenAudio>();
+
             // Request SMS permission
             RequestSMSpermission();
         }
@@ -39,6 +45,7 @@ namespace CecilsCall.Droid
         {
             base.OnPause();
             isOnPause = true;
+            Debugger.Msg("MainActivity.OnPause()");
 
             // If from lock screen then return
             if (AlarmReceiver.isScreenOff)

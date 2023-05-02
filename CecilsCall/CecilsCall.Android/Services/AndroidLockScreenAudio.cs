@@ -27,8 +27,6 @@ namespace CecilsCall.Droid.Services
 
         private MediaPlayer player;
         private AudioManager audioManager;
-        private WifiManager wifiManager;
-        private WifiManager.WifiLock wifiLock;
         private RemoteControlClient remoteControlClient;
         private ComponentName remoteComponentName;
         private bool paused;
@@ -42,7 +40,6 @@ namespace CecilsCall.Droid.Services
 
                 //Extract audio and notificaton managers from system services
                 audioManager = (AudioManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.AudioService);
-                wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(WifiService);
 
                 // Initialize the receiver of actions from audioManager
                 remoteComponentName = new ComponentName(PackageName, new RemoteLockScreenControlReceiver().ComponentName);
@@ -88,10 +85,14 @@ namespace CecilsCall.Droid.Services
         {
             try
             {
-                audioManager.UnregisterMediaButtonEventReceiver(remoteComponentName);
-                audioManager.UnregisterRemoteControlClient(remoteControlClient);
-                remoteControlClient.Dispose();
-                remoteControlClient = null;
+                if (remoteComponentName != null)
+                    audioManager.UnregisterMediaButtonEventReceiver(remoteComponentName);
+                if (remoteControlClient != null)
+                {
+                    audioManager.UnregisterRemoteControlClient(remoteControlClient);
+                    remoteControlClient.Dispose();
+                    remoteControlClient = null;
+                }
             }
             catch (Exception err)
             {
@@ -133,6 +134,7 @@ namespace CecilsCall.Droid.Services
             }
 
             //Set sticky as we are a long running operation
+            // If we get killed, after returning from here, restart
             return StartCommandResult.Sticky;
         }
         private async void TxButtonIsTouched()
@@ -167,8 +169,9 @@ namespace CecilsCall.Droid.Services
                 {
                     Debugger.Msg("LSA.IntializePlayer: Completion");
 
-                    // Play more. The playing will be stopped by 
-                    DependencyService.Get<ILockScreenAudio>().FireIntent("com.xamarin.action.PLAY");
+                    // Stop, but then play more
+                    Stop();
+                    FireIntent("com.xamarin.action.PLAY");
                 };
             }
             catch (Exception err)
@@ -202,7 +205,7 @@ namespace CecilsCall.Droid.Services
             Debugger.Msg("LSA.Play()");
 
             try
-            {                
+            {
                 // If first time playing
                 if (player == null)
                 {
@@ -241,7 +244,6 @@ namespace CecilsCall.Droid.Services
                 await player.SetDataSourceAsync(fd.FileDescriptor, fd.StartOffset, fd.Length);
 
                 player.PrepareAsync();
-                AquireWifiLock();
 
                 //Update the remote control client that we are buffering
                 RegisterRemoteClient();
@@ -258,6 +260,7 @@ namespace CecilsCall.Droid.Services
         {
             try
             {
+                Debugger.Msg("LSA.Pause");
                 if (player == null) return;
 
                 if (player.IsPlaying) player.Pause();
@@ -294,11 +297,9 @@ namespace CecilsCall.Droid.Services
 
                 player.Reset();
                 paused = false;
-                ReleaseWifiLock();
                 UnregisterRemoteClient();
 
-                // =================== DESTROY PLAYER ======================
-                // Reset as though the app restarts from the begining
+                // Destruction of player
                 player.Release();
                 player = null;
             }
@@ -307,23 +308,9 @@ namespace CecilsCall.Droid.Services
                 Debugger.Msg("LSA.Stop ERROR: " + err.Message);
             }
         }
-        private void AquireWifiLock()
-        {
-            if (wifiLock == null)
-            {
-                wifiLock = wifiManager.CreateWifiLock(Android.Net.WifiMode.Full, "xamarin_wifi_lock");
-            }
-            wifiLock.Acquire();
-        }
-        private void ReleaseWifiLock()
-        {
-            if (wifiLock == null) return;
-
-            wifiLock.Release();
-            wifiLock = null;
-        }
         public override void OnDestroy()
         {
+            Debugger.Msg("LSA.OnDestroy");
             base.OnDestroy();
             if (player != null)
             {

@@ -17,7 +17,6 @@ namespace CecilsCall.Droid.Services
         public override void OnReceive(Context context, Intent intent)
         {
             // This method will act on the action on the media player button on LOCK SCREEN
-            Debugger.Msg("<<<<< RLSCR.OnReceive from LockScreen >>>>>");
 
             try
             {
@@ -65,6 +64,8 @@ namespace CecilsCall.Droid.Services
                     default:
                         return;
                 }
+
+                Debugger.Msg("<<<<< RLSCR.OnReceive action: " + action + " >>>>>");
 
                 DependencyService.Get<ILockScreenAudio>().FireIntent(action);
             }

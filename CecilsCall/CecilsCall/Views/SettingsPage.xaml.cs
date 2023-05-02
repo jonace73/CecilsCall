@@ -12,16 +12,17 @@ using Xamarin.Forms.Xaml;
 
 namespace CecilsCall.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Settings : ContentPage
-	{
-		public static string ownersName = "Jon Anderson";// change to "" for the release version
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Settings : ContentPage
+    {
+
+        public static string ownersName = "Jon Anderson";// change to "" for the release version
         public static int maxNumberRepeatitions = 1;// change to 7 for the release version
         public static string sellersContact = "0449271275";
-        public Settings ()
-		{
-			InitializeComponent ();
-		}
+        public Settings()
+        {
+            InitializeComponent();
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -30,23 +31,34 @@ namespace CecilsCall.Views
             ChangeButtonLooks();
         }
         async void OnSaveSettingsButtonClicked(object sender, EventArgs e)
-		{
+        {
 
             Crashes.GenerateTestCrash();
 
             // Copy input info
             ownersName = OwnersName.Text;
+            if (ownersName == null)
+            {
+                await DisplayAlert("Error:", "Phone owner's name must be provided.", "OK");
+            }
+
+            // Seller's contact number
             sellersContact = SellersContact.Text;
 
             // Check for Maximum number of repeatitions as integer
             if (int.TryParse(MaxNumberRepeatitions.Text, out int value))
-			{
-				maxNumberRepeatitions = value;
+            {
+                maxNumberRepeatitions = value;
 
-            } else
-			{
+            }
+            else
+            {
                 await DisplayAlert("Error:", "Maximum number of repeatition is not an integer.", "OK");
             }
+
+            // Alarm duration revise if maxNumberRepeatitions > 1, the default
+            if (maxNumberRepeatitions > 1)
+                App.alarmDuration = await DependencyService.Get<IAudioDuration>().GetAudioDuration();
         }
         public async void OnCrashButtonClicked(object sender, EventArgs e)
         {
@@ -92,7 +104,7 @@ namespace CecilsCall.Views
         }
         //
         public async void OnDebugButtonClicked(object sender, EventArgs e)
-		{
+        {
             // Toggle debug button 
             App.isInDebug = !App.isInDebug;
 
@@ -100,12 +112,13 @@ namespace CecilsCall.Views
             ChangeButtonLooks();
 
             Contact contact = new Contact();
-            contact.name= "Manuel Blanco Abello";
+            contact.name = "Manuel Blanco Abello";
             contact.number = "0449271275";
             if (App.isInDebug)
             {
                 await ContactsPage.DBContacts.SaveContactAsync(contact);
-            } else
+            }
+            else
             {
                 Contact contactToDelete = await ContactsPage.DBContacts.GetContactByNonIDAsync(contact.name, contact.number);
                 await ContactsPage.DBContacts.DeleteContactAsync(contactToDelete);

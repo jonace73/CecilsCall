@@ -3,13 +3,15 @@ using Xamarin.Forms;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
 
 namespace CecilsCall
 {
     /* This class is the "MAIN" of the program */
     public partial class App : Application
     {
-        public static bool isInDebug = false;
+        public static bool isInDebug = true;
+        public static int alarmDuration;
 
         public App()
         {
@@ -17,6 +19,9 @@ namespace CecilsCall
 
             // Initialize main page
             MainPage = new AppShell();//AppShell.xaml as the main page
+
+            // Set alarm duration with default repeatition of one
+            SetAlarmDuration();
 
             // Set alarm
             DependencyService.Get<IAlarmClock>().SetNearestInTimeAlarm();
@@ -34,6 +39,10 @@ namespace CecilsCall
         }
         protected override void OnResume()
         {
+        }
+        async void SetAlarmDuration()
+        {   
+            alarmDuration = await DependencyService.Get<IAudioDuration>().GetAudioDuration();
         }
     }
 }

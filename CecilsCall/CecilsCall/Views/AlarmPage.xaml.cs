@@ -51,11 +51,12 @@ namespace CecilsCall.Views
             {
                 AlarmLabel.Text = "Next alarm at:";
                 NextAlarm.Text = alarmP.AlarmTime;
-            } else
+            }
+            else
             {
                 AlarmLabel.Text = "Please click 'Edit' to enter an alarm.";
                 NextAlarm.Text = "";
-            }                                       
+            }
         }
         async void OnKillPageButtonClicked(object sender, EventArgs e)
         {
@@ -143,7 +144,7 @@ namespace CecilsCall.Views
         {
             TimeSpan ts = new TimeSpan(0, 0, remainingTime);
             remainingTimeLabel.IsVisible = true;
-            this.remainingTime.IsVisible= true;
+            this.remainingTime.IsVisible = true;
             this.remainingTime.Text = ts.ToString(@"hh\:mm\:ss");
         }
         private void StopSMSTimer()
@@ -156,9 +157,10 @@ namespace CecilsCall.Views
             // Reset remaining time
             mNumberOfTicks = 0;
         }
-        private async void BeginRemainingAlarmTimeCountDown()
+        private void BeginRemainingAlarmTimeCountDown()
         {
-            int alarmDuration = await DependencyService.Get<IAudioDuration>().GetAudioDuration();
+            int alarmDuration = App.alarmDuration;
+            DebugPage.AppendLine("AlarmPage.BeginRemainingAlarmTimeCountDown alarmDuration: " + alarmDuration);
             remainingTime.IsVisible = true;//Display remaining time
             mSendSMS = true;
 

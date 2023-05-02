@@ -21,6 +21,8 @@ namespace CecilsCall.Services
             if (isShaken) return;
             isShaken = true;// signal that the phone is shaken already
 
+            DebugPage.AppendLine("DetectShake.Accelerometer_ShakeDetected");
+
             // Kill any AboutPage who subscribes to this message
             MessagingCenter.Send("AnythingString", "KillAboutPage");
         }

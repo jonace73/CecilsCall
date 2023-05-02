@@ -51,13 +51,11 @@ namespace CecilsCall.Droid.Services
             }
             catch (Exception err)
             {
-                /*/
-                string msg = err.Message;
-                string shortMsg = msg.Remove(0, 65);//*/
                 Debugger.Msg("LSA.SetAlarm ERROR: " + err.Message);
             }
         }
-        public string GetCurrentLocalAlarmTime() {
+        public string GetCurrentLocalAlarmTime()
+        {
             return currentLocalAlarmTime;
         }
         public void CancelAlarm(string ID, string requestCode)
@@ -167,17 +165,20 @@ namespace CecilsCall.Droid.Services
 
             // Signal system that alarm is on. DON'T TRANSFER THIS CODE
             AlarmPage.isAlarming = true;
-            isScreenOff = PowerAwaker.IsScreenOff();
-            Debugger.Msg("AlarmReceiver.Received on: " + DateTime.Now.ToString("HH:mm:ss") +" IsScreenOff: " + isScreenOff);
+            isScreenOff = !PowerAwaker.IsScreenOn();
+            Debugger.Msg("AlarmReceiver.Received on: " + DateTime.Now.ToString("HH:mm:ss") + " IsScreenOff: " + isScreenOff);
 
             // Vibrate
             Vibrate(5000);
 
+            // Sound the alarm. MUST be BEFORE WakeUp for it to be BEFORE BringAppToForeground
+            SoundAlarm(context);
+
             // Wake up screen
             WakeUp(context, intent);
 
-            // Sound the alarm
-            SoundAlarm(context);
+            // Start monitoring shake
+            AndroidAlarmClock.gDetectShake.StartMonitoring();
         }
         private async static Task<string> GetAlarmTime(Intent intent)
         {
@@ -201,22 +202,26 @@ namespace CecilsCall.Droid.Services
         {
             try
             {
-                Debugger.Msg("AlarmReceiver.WakeUp() IsScreenOff: " + PowerAwaker.IsScreenOff());
+                Debugger.Msg("AlarmReceiver.WakeUp() IsScreenOff: " + !PowerAwaker.IsScreenOn());
 
-                // Wake phone up
-                PowerAwaker.Acquire(context);
+                // Wake phone up if asleep. Not screen on also means the phone is NOT INTERACTIVE
+                if (!PowerAwaker.IsScreenOn())
+                {
+                    PowerAwaker.Acquire(context);
+                }
 
-                // During screen lock App.Current != null. However, it will become null
-                // when viewing the App after the screen lock activity.
-                // Push new AboutPage("true") onto the modal stack
-                if (App.Current != null)
+                // EVEN IF the app is hidden by lockscreen, STILL the app must be brought to the foreground, and push AlarmPage
+                // WHERE the ringing can be stopped using AlarmPage.BeginRemainingAlarmTimeCountDown 
+
+                // If app is not visible (i.e., another app is in the foreground) then bring it to foregroung
+                if (MainActivity.isOnPause)
                 {
-                    await App.Current.MainPage.Navigation.PushModalAsync(new AlarmPage("true"));
+                    BringAppToForeground();
                 }
-                else
-                {
-                    Debugger.Msg("AlarmReceiver.WakeUp App.Current == null");
-                }
+
+                // Once in the foreground, push new AboutPage onto the modal stack
+                Debugger.Msg("AlarmReceiver.WakeUp() App.Current == null: " + (App.Current == null));
+                await App.Current.MainPage.Navigation.PushModalAsync(new AlarmPage("true"));
             }
             catch (Exception err)
             {
@@ -226,16 +231,11 @@ namespace CecilsCall.Droid.Services
         [System.Obsolete]
         private void SoundAlarm(Android.Content.Context context)
         {
-            Debugger.Msg("<<<<< AlarmReceiver.RingBell >>>>>");
-            try
-            {
-                // Respond to AudioManager keys on lock screen
-                RemoteLockScreenControlReceiver.respondToKey = true;
-            }
-            catch (Exception err)
-            {
-                Debugger.Msg("RingBell ERROR respondToKey: " + err.Message);
-            }
+            Debugger.Msg("<<<<< AlarmReceiver.SoundAlarm >>>>>");
+
+            // Respond to AudioManager keys on lock screen
+            RemoteLockScreenControlReceiver.respondToKey = true;
+
             try
             {
                 // Fire intent to start ringing BEFORE BringAppToForeground that is NECESSARY in MainActivity.OnPause
@@ -245,27 +245,6 @@ namespace CecilsCall.Droid.Services
             {
                 Debugger.Msg("RingBell ERROR FireIntent: " + err.Message);
                 // You must call Xamarin.Forms.Forms.Init(); prior to using this property
-            }
-            try
-            {
-                // Start monitoring shake
-                AndroidAlarmClock.gDetectShake.StartMonitoring();
-            }
-            catch (Exception err)
-            {
-                Debugger.Msg("RingBell ERROR StartMonitoring: " + err.Message);
-            }
-            try
-            {
-                // If onPause, go to foreground
-                if (MainActivity.isOnPause)
-                {
-                    BringAppToForeground();
-                }
-            }
-            catch (Exception err)
-            {
-                Debugger.Msg("RingBell ERROR BringAppToForeground: " + err.Message);
             }
         }
         void BringAppToForeground()
@@ -280,6 +259,7 @@ namespace CecilsCall.Droid.Services
                 if (taskinfo.TopActivity.PackageName == packageName)
                 {
                     am.MoveTaskToFront(taskinfo.Id, 0);
+                    break;
                 }
             }
         }
@@ -304,11 +284,13 @@ namespace CecilsCall.Droid.Services
             wakeLock = pm.NewWakeLock(WakeLockFlags.Full | WakeLockFlags.AcquireCausesWakeup | WakeLockFlags.OnAfterRelease, "MainActivity");
             wakeLock.Acquire();
         }
-        public static bool IsScreenOff()
+        public static bool IsScreenOn()
         {
+
+            // Checks if device is not in active state, i.e., the phone is OFF or asleep
             Context context = Android.App.Application.Context;
             PowerManager pm = (PowerManager)context.GetSystemService(Context.PowerService);
-            return !pm.IsScreenOn;
+            return pm.IsScreenOn;
         }
     }
 }
