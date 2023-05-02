@@ -28,7 +28,7 @@ namespace CecilsCall
         }
         protected override void OnStart()
         {
-            AppCenter.Start("android=1d761f5e-34f5-4a7e-9083-0675f7eaf823;" +
+            AppCenter.Start("android=dd3469e0-5bd3-4973-9f1b-6975738f6bd2;" +
                               "uwp={Your UWP App secret here};" +
                               "ios={Your iOS App secret here};" +
                               "macos={Your macOS App secret here};",
